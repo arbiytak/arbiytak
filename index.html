@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Motors Egypt</title>
-<.brand img{width:44px;height:44px;object-fit:contain}
+<style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#fff;max-width:480px;margin:auto;padding-bottom:90px}
 .top{padding:16px;display:flex;justify-content:space-between;align-items:center}
@@ -18,8 +18,8 @@ body{background:#fff;max-width:480px;margin:auto;padding-bottom:90px}
 .sec{padding:4px 16px;font-size:19px}
 .brands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 16px}
 .brand{border:1px solid #eee;border-radius:14px;padding:12px 4px;text-align:center;cursor:pointer}
-
-.brand.active{border-color:#00AA06;background:#eaffea}
+.brand img{width:44px;height:44px;object-fit:contain}
+.brand p{font-size:12px;margin-top:4px}.brand.active{border-color:#00AA06;background:#eaffea}
 .latest{padding:12px 16px 0;display:flex;justify-content:space-between}
 .latest a{color:#00AA06;text-decoration:none;font-weight:800}
 .grid{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -41,7 +41,7 @@ nav a.active{color:#00AA06;font-weight:900}
 </style>
 </head>
 <body>
-<div class="top"><h1><span style="border:2px solid #00AA06;border-radius:10px;padding:2px 6px">🚗</span> Motors <span>Egypt</span></h1>
+<div class="top"><h1><span style="border:2px solid #00AA06;border-radius:10px;padding:2px 6px">🚗</span> Motors <span>Egypt</span></h1><div class="bell">🔔</div></div>
 <div class="search">🔍<input id="s" placeholder="دور على عربيتك"><span>⚙️</span></div>
 <div class="tabs"><button class="active" onclick="fc('الكل',this)">الكل</button><button onclick="fc('كسر زيرو',this)">كسر زيرو</button><button onclick="fc('مستعمل',this)">مستعمل</button><button onclick="fc('زيرو',this)">زيرو</button></div>
 <h2 class="sec">ماركات السيارات</h2>
@@ -52,24 +52,8 @@ nav a.active{color:#00AA06;font-weight:900}
 <nav><a href="#" class="active">🏠<br>الرئيسية</a><a href="#" onclick="om()">➕<br>إضافة</a><a href="#">❤️<br>المفضلة</a></nav>
 <div class="modal" id="modal"><div class="mb"><h2>أضف عربيتك</h2><p style="color:#777;font-size:13px;margin:6px 0 14px">للمعارض والأفراد - مجاناً</p><label>الماركة</label><select id="b"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Nissan</option><option>MG</option><option>Chevrolet</option></select><label>الموديل</label><input id="m" placeholder="مثال: Corolla"><label>السنة</label><input id="y" type="number" placeholder="2023"><label>السعر</label><input id="p" type="number" placeholder="850000"><label>المدينة</label><select id="c"><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>المنصورة</option><option>الزقازيق</option><option>الحسينية</option></select><label>واتساب</label><input id="w" placeholder="01xxxxxxxxx"><button onclick="add()">انشر مجاناً</button><button style="background:#eee;color:#333;margin-top:8px" onclick="cm()">إلغاء</button></div></div>
 <script>
-  let brands=[
-{n:'Toyota',img:'https://logo.clearbit.com/toyota.com'},
-{n:'Hyundai',img:'https://logo.clearbit.com/hyundai.com'},
-{n:'Kia',img:'https://logo.clearbit.com/kia.com'},
-{n:'Nissan',img:'https://logo.clearbit.com/nissan.com'},
-{n:'Chevrolet',img:'https://logo.clearbit.com/chevrolet.com'},
-{n:'MG',img:'https://logo.clearbit.com/mg.co.uk'},
-{n:'BMW',img:'https://logo.clearbit.com/bmw.com'},
-{n:'Mercedes',img:'https://logo.clearbit.com/mercedes-benz.com'}
-];
-let cars=[
-{a:'Toyota',m:'Toyota Corolla 2023',p:850000,c:'القاهرة',y:2023,k:'كسر زيرو',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800'},
-{a:'Hyundai',m:'Hyundai Tucson 2022',p:1250000,c:'الجيزة',y:2022,k:'مستعمل',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800'},
-{a:'Kia',m:'Kia Sportage 2021',p:980000,c:'الإسكندرية',y:2021,k:'مستعمل',img:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800'},
-{a:'Nissan',m:'Nissan Sunny 2022',p:620000,c:'المنصورة',y:2022,k:'زيرو',img:'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800'},
-{a:'Toyota',m:'Toyota Camry 2022',p:950000,c:'الزقازيق',y:2022,k:'كسر زيرو',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800'},
-{a:'MG',m:'MG ZS 2022',p:680000,c:'الحسينية',y:2022,k:'مستعمل',img:'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?w=800'}
-];
+let brands=[{n:'Toyota',img:'https://logo.clearbit.com/toyota.com'},{n:'Hyundai',img:'https://logo.clearbit.com/hyundai.com'},{n:'Kia',img:'https://logo.clearbit.com/kia.com'},{n:'Nissan',img:'https://logo.clearbit.com/nissan.com'},{n:'Chevrolet',img:'https://logo.clearbit.com/chevrolet.com'},{n:'MG',img:'https://logo.clearbit.com/mg.co.uk'},{n:'BMW',img:'https://logo.clearbit.com/bmw.com'},{n:'Mercedes',img:'https://logo.clearbit.com/mercedes-benz.com'}];
+let cars=[{a:'Toyota',m:'Toyota Corolla 2023',p:850000,c:'القاهرة',y:2023,k:'كسر زيرو',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800'},{a:'Hyundai',m:'Hyundai Tucson 2022',p:1250000,c:'الجيزة',y:2022,k:'مستعمل',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800'},{a:'Kia',m:'Kia Sportage 2021',p:980000,c:'الإسكندرية',y:2021,k:'مستعمل',img:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800'},{a:'Nissan',m:'Nissan Sunny 2022',p:620000,c:'المنصورة',y:2022,k:'زيرو',img:'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800'},{a:'Toyota',m:'Toyota Camry 2022',p:950000,c:'الزقازيق',y:2022,k:'كسر زيرو',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800'},{a:'MG',m:'MG ZS 2022',p:680000,c:'الحسينية',y:2022,k:'مستعمل',img:'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?w=800'}];
 let cb='',ck='الكل';
 function rb(){document.getElementById('brands').innerHTML=brands.map(x=>`<div class="brand ${cb===x.n?'active':''}" onclick="pb('${x.n}')"><img src="${x.img}"><p>${x.n}</p></div>`).join('')}
 function pb(n){cb=cb===n?'':n;rb();ap()}
