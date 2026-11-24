@@ -45,3 +45,25 @@ nav a.active{color:#00AA06;font-weight:900}
 <body>
 <div class="header"><h1>🚗 عربيتك</h1><p>بيع واشتري عربيتك في مصر مجاناً</p></div>
 <div class="search"><input id="searchInput" placeholder="دور على عربية... كور
+            <div class="filters" id="filters"><button class="active" onclick="filterBrand('الكل',this)">الكل</button><button onclick="filterBrand('Toyota',this)">Toyota</button><button onclick="filterBrand('Hyundai',this)">Hyundai</button><button onclick="filterBrand('Kia',this)">Kia</button><button onclick="filterBrand('Nissan',this)">Nissan</button><button onclick="filterBrand('MG',this)">MG</button></div>
+<div class="section"><h2>عربيات للبيع 🔥</h2><span id="count"></span></div>
+<div class="grid" id="cars"></div>
+<button class="add-btn" onclick="openModal()">+ اعرض عربيتك مجاناً</button>
+<nav><a href="#" class="active">🏠<br>الرئيسية</a><a href="#" onclick="openModal()">➕<br>إضافة</a><a href="#" onclick="showFav()">❤️<br>المفضلة</a></nav>
+<div class="modal" id="modal"><div class="modal-box"><h2>أضف عربيتك للبيع</h2><p style="color:#777;font-size:13px;margin:6px 0 14px">املأ البيانات وهننشرها بعد المراجعة</p><label>الماركة</label><select id="b"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Nissan</option><option>MG</option></select><label>الموديل</label><input id="m" placeholder="مثال: كورولا"><label>السنة</label><input id="y" type="number" placeholder="2022"><label>السعر</label><input id="p" type="number" placeholder="850000"><label>المدينة</label><select id="c"><option>الحسينية</option><option>الزقازيق</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>المنصورة</option></select><label>واتساب</label><input id="w" placeholder="01xxxxxxxxx"><button onclick="addCar()">انشر عربيتك مجاناً</button><button style="background:#eee;color:#333;margin-top:8px" onclick="closeModal()">إلغاء</button></div></div>
+<script>
+let allCars=[{brand:'Toyota',model:'كورولا',year:2022,price:950000,city:'الزقازيق',km:'45,000 كم',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800',wa:'201000000000'},{brand:'Hyundai',model:'النترا',year:2021,price:780000,city:'القاهرة',km:'60,000 كم',img:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800',wa:'201000000000'},{brand:'Kia',model:'سبورتاج',year:2023,price:1250000,city:'الجيزة',km:'20,000 كم',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800',wa:'201000000000'},{brand:'Nissan',model:'صني',year:2020,price:520000,city:'الحسينية',km:'80,000 كم',img:'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800',wa:'201000000000'},{brand:'MG',model:'ZS',year:2022,price:680000,city:'المنصورة',km:'35,000 كم',img:'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?w=800',wa:'201000000000'}];
+let favs=new Set();let cur='الكل';
+function render(list){let el=document.getElementById('cars');document.getElementById('count').innerText=list.length+' عربية';el.innerHTML=list.map((car,i)=>`<div class="card"><div class="imgwrap"><img src="${car.img}"><button class="fav" onclick="toggleFav(${i})">${favs.has(i)?'❤️':'🤍'}</button></div><div class="card-body"><div class="price">${car.price.toLocaleString()} ج.م</div><h3>${car.brand} ${car.model} ${car.year}</h3><div class="meta">${car.city} • ${car.km} • أوتوماتيك</div><div class="actions"><a class="wa" href="https://wa.me/${car.wa}">واتساب</a><button class="details" onclick="alert('${car.brand} ${car.model} - ${car.city}')">التفاصيل</button></div></div></div>`).join('')}
+function filterBrand(b,btn){cur=b;document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');apply()}
+function doSearch(){apply()}
+function apply(){let q=document.getElementById('searchInput').value;let f=allCars.filter(c=>(cur==='الكل'||c.brand===cur)&&(c.model.includes(q)||c.brand.toLowerCase().includes(q.toLowerCase())||q==''));render(f)}
+function toggleFav(i){favs.has(i)?favs.delete(i):favs.add(i);apply()}
+function showFav(){let f=allCars.filter((_,i)=>favs.has(i));render(f);window.scrollTo(0,0)}
+function openModal(){document.getElementById('modal').classList.add('open')}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function addCar(){let car={brand:document.getElementById('b').value,model:document.getElementById('m').value||'موديل',year:document.getElementById('y').value||2024,price:+document.getElementById('p').value||0,city:document.getElementById('c').value,km:'0 كم',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800',wa:document.getElementById('w').value||'201000000000'};allCars.unshift(car);closeModal();apply();alert('عربيتك اتبعتت للمراجعة ✅')}
+render(allCars);
+</script>
+</body>
+</html>          
