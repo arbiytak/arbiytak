@@ -3,36 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Motors Egypt - عربيتك</title>
+<title>Motors Egypt</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#F6F7F9;max-width:480px;margin:auto;padding-bottom:80px}
-.top{background:#111;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;color:#fff}
-.top b{font-size:19px}.top b span{color:#00AA06}
-.top a{background:#00AA06;color:#fff;text-decoration:none;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:800}
-.hero{padding:16px}
-.hero h1{font-size:26px;line-height:1.35}
-.hero h1 span{color:#00AA06}
-.hero p{color:#666;font-size:14px;margin-top:6px}
-.search{background:#fff;border-radius:14px;display:flex;padding:13px;gap:8px;margin-top:14px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-.search input{flex:1;border:none;outline:none;font-size:15px}
-.filters{margin:0 16px;display:flex;gap:8px}
-.filters select{flex:1;background:#fff;border:1px solid #eee;border-radius:12px;padding:11px;font-weight:700}
-.sec{padding:16px 16px 6px;font-size:19px;font-weight:900}
-.brands{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:6px 16px}
-.brand{background:#fff;border-radius:16px;padding:14px 6px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.04);cursor:pointer;min-height:118px}
-.brand .wrap{width:70px;height:55px;margin:auto;display:flex;align-items:center;justify-content:center}
-.brand img{max-width:70px;max-height:55px;object-fit:contain}
-.brand .fb{display:none;width:54px;height:54px;border-radius:16px;color:#fff;font-weight:900;font-size:20px;align-items:center;justify-content:center}
-.brand p{font-size:15px;font-weight:800;margin-top:8px}
-.brand span{color:#888;font-size:12px}
-.grid{padding:6px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.06)}
+body{background:#fff;max-width:480px;margin:auto;padding-bottom:80px}
+.top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.top b{font-size:24px}.top b span{color:#00AA06}
+.top .bell{width:40px;height:40px;border:1px solid #ddd;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.search{background:#F6F7F9;border-radius:12px;display:flex;padding:13px;gap:8px;margin:0 16px;align-items:center}
+.search input{flex:1;border:none;outline:none;background:transparent;font-size:15px}
+.pills{display:flex;gap:8px;padding:14px 16px;overflow-x:auto;white-space:nowrap}
+.pills button{border:1px solid #ddd;background:#fff;padding:9px 18px;border-radius:10px;font-size:14px;font-weight:700}
+.pills button.on{background:#00AA06;color:#fff;border-color:#00AA06}
+.sec{padding:6px 16px;font-size:20px;font-weight:900}
+.brands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:10px 16px}
+.brand{background:#fff;border:1px solid #eee;border-radius:14px;padding:12px 4px;text-align:center;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.brand img{width:100%;height:38px;object-fit:contain}
+.brand p{font-size:12px;font-weight:700;margin-top:8px}
+.grid{padding:10px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08)}
 .card img{width:100%;height:110px;object-fit:cover}
-.cb{padding:10px}.cb h3{font-size:13px}
-.price{color:#00AA06;font-weight:900;margin-top:4px}
-.meta{color:#777;font-size:11px;margin-top:4px}
-.wa{display:block;text-align:center;background:#00AA06;color:#fff;text-decoration:none;padding:8px;border-radius:10px;font-weight:800;font-size:13px;margin-top:8px}
+.cb{padding:10px}.cb h3{font-size:14px}
+.price{color:#00AA06;font-weight:900;font-size:15px;margin-top:4px}
+.meta{color:#555;font-size:11px;margin-top:4px}
 .cta{margin:16px;background:#00AA06;color:#fff;text-align:center;padding:14px;border-radius:14px;font-weight:900;cursor:pointer}
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:8px 0;z-index:20}
 nav a{text-decoration:none;color:#777;text-align:center;font-size:12px;line-height:1.5}
@@ -42,55 +35,47 @@ nav a.active{color:#00AA06;font-weight:900}
 .mb{background:#fff;width:100%;max-width:480px;margin:auto;border-radius:24px 24px 0 0;padding:20px;max-height:92vh;overflow:auto}
 .mb input,.mb select{width:100%;border:1px solid #ddd;border-radius:12px;padding:12px;margin:6px 0 12px}
 .mb button{width:100%;background:#00AA06;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900}
-.pkg{display:flex;gap:8px;margin:6px 0 12px}
-.pkg div{flex:1;border:2px solid #eee;border-radius:12px;padding:10px;text-align:center;font-size:13px;cursor:pointer}
-.pkg div.sel{border-color:#00AA06;background:#Eaffea}
 </style>
 </head>
 <body>
-<div class="top"><b>🚗 Motors <span>Egypt</span></b><a href="#" onclick="om()">+ أضف إعلان</a></div>
-<div class="hero"><h1>بيع واشتري عربيتك<br><span>من غير وسيط</span></h1><p>أكبر سوق عربيات في مصر - معارض وأفراد</p><div class="search">🔍<input id="s" placeholder="دور على ماركة أو موديل"></div></div>
-<div class="filters">
-<select id="country"><option value="">كل الدول</option><option>مصر</option><option>السعودية</option><option>الإمارات</option></select>
-<select id="cityF"><option value="">كل المدن</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>المنصورة</option><option>الزقازيق</option><option>الحسينية</option></select>
-</div>
+<div class="top"><div class="bell">🔔</div><b>Motors <span>Egypt</span></b><b>🚗</b></div>
+<div class="search">⚙️<input placeholder="دور على عربيتك"><span>🔍</span></div>
+<div class="pills"><button class="on">الكل</button><button>كسر زيرو</button><button>مستعمل</button><button>زيرو</button></div>
 <h2 class="sec">ماركات السيارات</h2>
 <div class="brands">
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/toyota.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#EB0A1E">T</div></div><p>تويوتا</p><span>Toyota • 2,340</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/hyundai.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#002C5F">H</div></div><p>هيونداي</p><span>Hyundai • 1,265</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/kia.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#000">KIA</div></div><p>كيا</p><span>Kia • 1,059</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/nissan.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#C3002F">N</div></div><p>نيسان</p><span>Nissan • 850</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/mercedes-benz.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#222">M</div></div><p>مرسيدس</p><span>Mercedes • 1,627</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/bmw.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#1C69D4">BMW</div></div><p>بي ام دبليو</p><span>BMW • 829</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/renault.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#FFCC00;color:#000">R</div></div><p>رينو</p><span>Renault • 896</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/chevrolet.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#CD9832">C</div></div><p>شيفروليه</p><span>Chevrolet • 740</span></div>
-<div class="brand"><div class="wrap"><img src="https://cdn.jsdelivr.net/npm/node-vehicle-logos@0.1.0/assets/mg.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fb" style="background:#D5001C">MG</div></div><p>ام جي</p><span>MG • 620</span></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/Toyota-logo-1989-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/e/e7/Toyota.svg" onerror="fix(this)"><p>Toyota</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/Hyundai-logo-2011-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg" onerror="fix(this)"><p>Hyundai</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/Kia-logo-2021-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/9/9d/Kia-logo.svg" onerror="fix(this)"><p>Kia</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/Nissan-logo-2020-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/2/23/Nissan_logo.svg" onerror="fix(this)"><p>Nissan</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/Mercedes-Benz-logo-2011-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" onerror="fix(this)"><p>Mercedes</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/BMW-logo-2020-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg" onerror="fix(this)"><p>BMW</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/Renault-logo-2021-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/7/7b/Renault_logo_2021.svg" onerror="fix(this)"><p>Renault</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/Chevrolet-logo-2013-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/1/1e/Chevrolet-logo.svg" onerror="fix(this)"><p>Chevrolet</p></div>
+<div class="brand"><img src="https://www.carlogos.org/logo/MG-logo-2011-2560x1440.png" data-bk="https://upload.wikimedia.org/wikipedia/commons/3/32/MG_logo.svg" onerror="fix(this)"><p>MG</p></div>
 </div>
 <h2 class="sec">أحدث العربيات</h2>
-<div class="grid" id="cars">
-<div class="card"><img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800"><div class="cb"><h3>Toyota Corolla 2023</h3><div class="price">جنيه 850,000</div><div class="meta">📍 القاهرة • 2023 • كسر زيرو</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"><div class="cb"><h3>Hyundai Tucson 2022</h3><div class="price">جنيه 1,250,000</div><div class="meta">📍 الجيزة • 2022 • مستعمل</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800"><div class="cb"><h3>Kia Sportage 2021</h3><div class="price">جنيه 980,000</div><div class="meta">📍 الإسكندرية • 2021 • مستعمل</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800"><div class="cb"><h3>Nissan Sunny 2022</h3><div class="price">جنيه 620,000</div><div class="meta">📍 المنصورة • 2022 • زيرو</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
+<div class="grid">
+<div class="card"><img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800"><div class="cb"><h3>Toyota Corolla 2023</h3><div class="price">جنيه 850,000</div><div class="meta">📍 القاهرة • 2023 • يدوي</div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"><div class="cb"><h3>Hyundai Tucson 2022</h3><div class="price">جنيه 1,250,000</div><div class="meta">📍 الجيزة • 2022 • أوتوماتيك</div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800"><div class="cb"><h3>Kia Sportage 2021</h3><div class="price">جنيه 980,000</div><div class="meta">📍 الإسكندرية • 2021 • أوتوماتيك</div></div></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800"><div class="cb"><h3>Nissan Sunny 2022</h3><div class="price">جنيه 620,000</div><div class="meta">📍 المنصورة • 2022 • يدوي</div></div></div>
 </div>
-<div class="cta" onclick="om()">+ اعرض عربيتك الآن - باقات من 200 ج</div>
+<div class="cta" onclick="om()">+ اعرض عربيتك الآن</div>
 <nav><a href="#" class="active">🏠<br>الرئيسية</a><a href="#">🚗<br>مستعملة</a><a href="#" onclick="om()">➕<br>أضف إعلان</a><a href="#">🚙<br>جديدة</a><a href="#">☰<br>المزيد</a></nav>
-<div class="modal" id="modal"><div class="mb"><h2>أضف عربيتك</h2><p style="color:#777;font-size:13px;margin:6px 0 14px">باقات مدفوعة - الدفع فودافون كاش</p>
-<label>اختر الباقة</label><div class="pkg"><div onclick="sp(0,this)">عادي<br><b>200 ج</b></div><div class="sel" onclick="sp(1,this)">مميز ⭐<br><b>500 ج</b></div><div onclick="sp(2,this)">معرض 👑<br><b>1500 ج</b></div></div>
+<div class="modal" id="modal"><div class="mb"><h2>أضف عربيتك</h2><p style="color:#777;font-size:13px;margin:6px 0 14px">املأ بيانات العربية وهننشرها</p>
 <label>الماركة</label><select id="b"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Nissan</option><option>MG</option><option>Chevrolet</option><option>BMW</option><option>Mercedes</option></select>
 <label>الموديل</label><input id="m" placeholder="مثال: Corolla">
 <label>السنة</label><input id="y" type="number" placeholder="2023">
 <label>السعر</label><input id="p" type="number" placeholder="850000">
-<label>الدولة</label><select id="co"><option>مصر</option><option>السعودية</option><option>الإمارات</option></select>
 <label>المدينة</label><select id="c"><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>المنصورة</option><option>الزقازيق</option><option>الحسينية</option></select>
 <label>الحالة</label><select id="k"><option>مستعمل</option><option>كسر زيرو</option><option>زيرو</option></select>
 <label>واتساب</label><input id="w" placeholder="01xxxxxxxxx">
-<button id="sb" onclick="add()">ادفع وانشر - 500 ج</button><button style="background:#eee;margin-top:8px" onclick="cm()">إلغاء</button></div></div>
+<button onclick="add()">انشر الإعلان</button><button style="background:#eee;margin-top:8px" onclick="cm()">إلغاء</button></div></div>
 <script>
-let curPrice=500,prices=[200,500,1500];
+function fix(el){if(!el.dataset.tried){el.dataset.tried=1;el.src=el.dataset.bk}else{el.style.display='none'}}
 function om(){document.getElementById('modal').classList.add('open')}
 function cm(){document.getElementById('modal').classList.remove('open')}
-function sp(i,el){curPrice=prices[i];document.querySelectorAll('.pkg div').forEach(d=>d.classList.remove('sel'));el.classList.add('sel');document.getElementById('sb').innerText='ادفع وانشر - '+curPrice+' ج'}
+function add(){alert('تم استلام إعلانك ✅');cm()}
 </script>
 </body>
 </html>
