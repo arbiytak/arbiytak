@@ -3,34 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عربيتك | سوق العربيات في مصر</title>
+<title>Motors Egypt | عربيتك</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#f8fbf8;max-width:480px;margin:auto;min-height:100vh;padding-bottom:90px}
-.header{background:#00AA06;color:#fff;padding:22px 16px 32px;border-radius:0 0 24px 24px;text-align:center}
-.header h1{font-size:28px;font-weight:900}
-.header p{opacity:.9;font-size:14px;margin-top:4px}
-.search{margin:-18px 16px 12px;background:#fff;border-radius:16px;padding:12px;display:flex;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
-.search input{flex:1;border:1px solid #eee;border-radius:12px;padding:12px;outline:none}
-.search button{background:#00AA06;color:#fff;border:none;border-radius:12px;padding:0 16px;font-weight:800}
-.filters{display:flex;gap:8px;overflow-x:auto;padding:4px 16px}
-.filters button{white-space:nowrap;border:1px solid #ddd;background:#fff;padding:8px 14px;border-radius:999px;cursor:pointer}
-.filters button.active{background:#00AA06;color:#fff;border-color:#00AA06}
-.section{padding:12px 16px 0;display:flex;justify-content:space-between;align-items:center}
-.section h2{font-size:18px}
-.grid{padding:12px 16px;display:grid;gap:14px}
-.card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-.card img{width:100%;height:180px;object-fit:cover}
-.card-body{padding:12px}
-.price{color:#00AA06;font-weight:900;font-size:19px}
-.card-body h3{font-size:16px;margin:4px 0}
-.meta{color:#777;font-size:13px}
-.actions{display:flex;gap:8px;margin-top:10px}
-.actions a,.actions button{flex:1;text-align:center;padding:11px;border-radius:12px;font-weight:800;text-decoration:none;font-size:14px;cursor:pointer}
-.wa{background:#25D366;color:#fff;border:none}
-.details{background:#111;color:#fff;border:none}
-.fav{position:absolute;top:10px;left:10px;background:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:18px}
-.imgwrap{position:relative}
+body{background:#fff;max-width:480px;margin:auto;min-height:100vh;padding-bottom:90px}
+.top{padding:16px;display:flex;justify-content:space-between;align-items:center}
+.top h1{font-size:24px;font-weight:900}.top h1 span{color:#00AA06}
+.bell{width:40px;height:40px;border:1px solid #eee;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.search{margin:0 16px;background:#f3f3f3;border-radius:14px;padding:13px;display:flex;gap:8px;align-items:center}
+.search input{flex:1;background:transparent;border:none;outline:none;font-size:15px;text-align:right}
+.tabs{display:flex;gap:8px;padding:12px 16px;overflow-x:auto}
+.tabs button{white-space:nowrap;border:1px solid #eee;background:#fff;padding:9px 18px;border-radius:12px;cursor:pointer;font-weight:700}
+.tabs button.active{background:#00AA06;color:#fff;border-color:#00AA06}
+h2.sec{padding:4px 16px;font-size:19px}
+.brands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 16px}
+.brand{border:1px solid #eee;border-radius:14px;padding:12px 4px;text-align:center;cursor:pointer;background:#fff}
+.brand b{font-size:22px}.brand p{font-size:12px;margin-top:4px;color:#333}
+.brand.active{border-color:#00AA06;background:#eaffea}
+.latest{padding:12px 16px 0;display:flex;justify-content:space-between;align-items:center}
+.latest a{color:#00AA06;text-decoration:none;font-weight:800}
+.grid{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.08)}
+.card img{width:100%;height:110px;object-fit:cover}
+.card-body{padding:10px}
+.card-body h3{font-size:13px;line-height:1.4}
+.price{color:#00AA06;font-weight:900;font-size:15px;margin-top:4px}
+.meta{color:#777;font-size:11px;margin-top:4px}
+.wa-btn{display:block;text-align:center;background:#00AA06;color:#fff;text-decoration:none;padding:8px;border-radius:10px;font-weight:800;font-size:13px;margin-top:8px}
 .add-btn{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#00AA06;color:#fff;border:none;padding:14px 22px;border-radius:999px;font-weight:900;box-shadow:0 8px 20px rgba(0,170,6,.4);z-index:10}
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:10px 0;z-index:20}
 nav a{text-decoration:none;color:#333;text-align:center;font-size:13px}
@@ -43,27 +42,37 @@ nav a.active{color:#00AA06;font-weight:900}
 </style>
 </head>
 <body>
-<div class="header"><h1>🚗 عربيتك</h1><p>بيع واشتري عربيتك في مصر مجاناً</p></div>
-<div class="search"><input id="searchInput" placeholder="دور على عربية... كور
-            <div class="filters" id="filters"><button class="active" onclick="filterBrand('الكل',this)">الكل</button><button onclick="filterBrand('Toyota',this)">Toyota</button><button onclick="filterBrand('Hyundai',this)">Hyundai</button><button onclick="filterBrand('Kia',this)">Kia</button><button onclick="filterBrand('Nissan',this)">Nissan</button><button onclick="filterBrand('MG',this)">MG</button></div>
-<div class="section"><h2>عربيات للبيع 🔥</h2><span id="count"></span></div>
-<div class="grid" id="cars"></div>
+<div class="top"><h1>Motors <span>Egypt</span></h1><div class="bell">🔔</div></div>
+<div class="search">🔍<input id="searchInput" placeholder="دور على عربيتك"><span>⚙️</span></div>
+<div class="tabs"><button class="active" onclick="filterCat('الكل',this)">الكل</button><button onclick="filterCat('كسر زيرو',this)">كسر زيرو</button><button onclick="filterCat('مستعمل',this)">مستعمل</button><button onclick="filterCat('زيرو',this)">زيرو</button></div>
+<h2 class="sec">ماركات السيارات</h2>
+<div class="brands" id="brands"></div>
+<div class="latest"><h2>أحدث العربيات</h2><a href="#">عرض الكل ‹</a></div>
+            <div class="grid" id="cars"></div>
 <button class="add-btn" onclick="openModal()">+ اعرض عربيتك مجاناً</button>
-<nav><a href="#" class="active">🏠<br>الرئيسية</a><a href="#" onclick="openModal()">➕<br>إضافة</a><a href="#" onclick="showFav()">❤️<br>المفضلة</a></nav>
-<div class="modal" id="modal"><div class="modal-box"><h2>أضف عربيتك للبيع</h2><p style="color:#777;font-size:13px;margin:6px 0 14px">املأ البيانات وهننشرها بعد المراجعة</p><label>الماركة</label><select id="b"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Nissan</option><option>MG</option></select><label>الموديل</label><input id="m" placeholder="مثال: كورولا"><label>السنة</label><input id="y" type="number" placeholder="2022"><label>السعر</label><input id="p" type="number" placeholder="850000"><label>المدينة</label><select id="c"><option>الحسينية</option><option>الزقازيق</option><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>المنصورة</option></select><label>واتساب</label><input id="w" placeholder="01xxxxxxxxx"><button onclick="addCar()">انشر عربيتك مجاناً</button><button style="background:#eee;color:#333;margin-top:8px" onclick="closeModal()">إلغاء</button></div></div>
+<nav><a href="#" class="active">🏠<br>الرئيسية</a><a href="#" onclick="openModal()">➕<br>إضافة</a><a href="#">❤️<br>المفضلة</a></nav>
+<div class="modal" id="modal"><div class="modal-box"><h2>أضف عربيتك</h2><p style="color:#777;font-size:13px;margin:6px 0 14px">للمعارض والأفراد - مجاناً</p><label>الماركة</label><select id="b"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Nissan</option><option>MG</option><option>Chevrolet</option></select><label>الموديل</label><input id="m" placeholder="مثال: Corolla"><label>السنة</label><input id="y" type="number" placeholder="2023"><label>السعر</label><input id="p" type="number" placeholder="850000"><label>المدينة</label><select id="c"><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>المنصورة</option><option>الزقازيق</option><option>الحسينية</option></select><label>واتساب المعرض</label><input id="w" placeholder="01xxxxxxxxx"><button onclick="addCar()">انشر مجاناً</button><button style="background:#eee;color:#333;margin-top:8px" onclick="closeModal()">إلغاء</button></div></div>
 <script>
-let allCars=[{brand:'Toyota',model:'كورولا',year:2022,price:950000,city:'الزقازيق',km:'45,000 كم',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800',wa:'201000000000'},{brand:'Hyundai',model:'النترا',year:2021,price:780000,city:'القاهرة',km:'60,000 كم',img:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800',wa:'201000000000'},{brand:'Kia',model:'سبورتاج',year:2023,price:1250000,city:'الجيزة',km:'20,000 كم',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800',wa:'201000000000'},{brand:'Nissan',model:'صني',year:2020,price:520000,city:'الحسينية',km:'80,000 كم',img:'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800',wa:'201000000000'},{brand:'MG',model:'ZS',year:2022,price:680000,city:'المنصورة',km:'35,000 كم',img:'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?w=800',wa:'201000000000'}];
-let favs=new Set();let cur='الكل';
-function render(list){let el=document.getElementById('cars');document.getElementById('count').innerText=list.length+' عربية';el.innerHTML=list.map((car,i)=>`<div class="card"><div class="imgwrap"><img src="${car.img}"><button class="fav" onclick="toggleFav(${i})">${favs.has(i)?'❤️':'🤍'}</button></div><div class="card-body"><div class="price">${car.price.toLocaleString()} ج.م</div><h3>${car.brand} ${car.model} ${car.year}</h3><div class="meta">${car.city} • ${car.km} • أوتوماتيك</div><div class="actions"><a class="wa" href="https://wa.me/${car.wa}">واتساب</a><button class="details" onclick="alert('${car.brand} ${car.model} - ${car.city}')">التفاصيل</button></div></div></div>`).join('')}
-function filterBrand(b,btn){cur=b;document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');apply()}
-function doSearch(){apply()}
-function apply(){let q=document.getElementById('searchInput').value;let f=allCars.filter(c=>(cur==='الكل'||c.brand===cur)&&(c.model.includes(q)||c.brand.toLowerCase().includes(q.toLowerCase())||q==''));render(f)}
-function toggleFav(i){favs.has(i)?favs.delete(i):favs.add(i);apply()}
-function showFav(){let f=allCars.filter((_,i)=>favs.has(i));render(f);window.scrollTo(0,0)}
+let brands=[{n:'Toyota',e:'🚗'},{n:'Hyundai',e:'🚙'},{n:'Kia',e:'🚘'},{n:'Nissan',e:'🏎️'},{n:'Chevrolet',e:'🚐'},{n:'MG',e:'🛻'},{n:'BMW',e:'🏁'},{n:'Mercedes',e:'⭐'}];
+let allCars=[
+{brand:'Toyota',model:'Toyota Corolla 2023',price:850000,city:'القاهرة',year:2023,cat:'كسر زيرو',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800',wa:'201000000000'},
+{brand:'Hyundai',model:'Hyundai Tucson 2022',price:1250000,city:'الجيزة',year:2022,cat:'مستعمل',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800',wa:'201000000000'},
+{brand:'Kia',model:'Kia Sportage 2021',price:980000,city:'الإسكندرية',year:2021,cat:'مستعمل',img:'https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800',wa:'201000000000'},
+{brand:'Nissan',model:'Nissan Sunny 2022',price:620000,city:'المنصورة',year:2022,cat:'زيرو',img:'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800',wa:'201000000000'},
+{brand:'Toyota',model:'Toyota Camry 2022',price:950000,city:'الزقازيق',year:2022,cat:'كسر زيرو',img:'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800',wa:'201000000000'},
+{brand:'MG',model:'MG ZS 2022',price:680000,city:'الحسينية',year:2022,cat:'مستعمل',img:'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?w=800',wa:'201000000000'}
+];
+let curBrand='';let curCat='الكل';
+function renderBrands(){document.getElementById('brands').innerHTML=brands.map(b=>`<div class="brand ${curBrand===b.n?'active':''}" onclick="pickBrand('${b.n}')"><b>${b.e}</b><p>${b.n}</p></div>`).join('')}
+function pickBrand(n){curBrand=curBrand===n?'':n;renderBrands();apply()}
+function render(list){document.getElementById('cars').innerHTML=list.map(c=>`<div class="card"><img src="${c.img}"><div class="card-body"><h3>${c.model}</h3><div class="price">جنيه ${c.price.toLocaleString()}</div><div class="meta">📍 ${c.city} • ${c.year} • ${c.cat}</div><a class="wa-btn" href="https://wa.me/${c.wa}">واتساب</a></div></div>`).join('')}
+function filterCat(cat,btn){curCat=cat;document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');apply()}
+function apply(){let q=document.getElementById('searchInput').value;let f=allCars.filter(c=>(curCat==='الكل'||c.cat===curCat)&&(curBrand===''||c.brand===curBrand)&&(q===''||c.model.toLowerCase().includes(q.toLowerCase())));render(f)}
 function openModal(){document.getElementById('modal').classList.add('open')}
 function closeModal(){document.getElementById('modal').classList.remove('open')}
-function addCar(){let car={brand:document.getElementById('b').value,model:document.getElementById('m').value||'موديل',year:document.getElementById('y').value||2024,price:+document.getElementById('p').value||0,city:document.getElementById('c').value,km:'0 كم',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800',wa:document.getElementById('w').value||'201000000000'};allCars.unshift(car);closeModal();apply();alert('عربيتك اتبعتت للمراجعة ✅')}
-render(allCars);
+function addCar(){let car={brand:document.getElementById('b').value,model:document.getElementById('b').value+' '+document.getElementById('m').value+' '+document.getElementById('y').value,price:+document.getElementById('p').value||0,city:document.getElementById('c').value,year:document.getElementById('y').value||2024,cat:'مستعمل',img:'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800',wa:document.getElementById('w').value||'201000000000'};allCars.unshift(car);closeModal();apply();alert('تم النشر ✅')}
+document.getElementById('searchInput').addEventListener('input',apply);
+renderBrands();render(allCars);
 </script>
 </body>
-</html>          
+</html>
