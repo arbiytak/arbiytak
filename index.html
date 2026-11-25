@@ -29,20 +29,29 @@ body{background:#fff;max-width:480px;margin:auto;padding-bottom:90px}
 .meta{color:#555;font-size:11px;margin-top:4px}
 .wa{display:block;text-align:center;background:#00AA06;color:#fff;text-decoration:none;padding:8px;border-radius:10px;font-weight:800;font-size:13px;margin-top:8px}
 .cta{margin:16px;background:#00AA06;color:#fff;text-align:center;padding:14px;border-radius:14px;font-weight:900;cursor:pointer}
+.showCard{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center;margin:0 16px 10px;box-shadow:0 2px 10px rgba(0,0,0,.05);cursor:pointer}
+.showCard .ico{width:56px;height:56px;background:#E8F5E9;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.showCard b{font-size:16px;display:block}
+.showCard span{color:#777;font-size:12px}
+.badge{display:inline-block;background:#E8F5E9;color:#00AA06;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700;margin-top:4px}
+.badge2{background:#FFF3E0;color:#E65100}
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:8px 0;z-index:20}
-nav a{text-decoration:none;color:#777;text-align:center;font-size:12px;line-height:1.5}
+nav a{text-decoration:none;color:#777;text-align:center;font-size:12px;line-height:1.5;cursor:pointer}
 nav a.active{color:#00AA06;font-weight:900}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:30;align-items:end}
 .modal.open{display:flex}
 .mb{background:#fff;width:100%;max-width:480px;margin:auto;border-radius:24px 24px 0 0;padding:20px;max-height:92vh;overflow:auto}
 .mb input,.mb select{width:100%;border:1px solid #ddd;border-radius:12px;padding:12px;margin:6px 0 12px}
 .mb button{width:100%;background:#00AA06;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900}
+.closeBtn{background:#eee !important;color:#111 !important;margin-top:8px}
+.moreBox{display:none;position:fixed;bottom:70px;left:50%;transform:translateX(-50%);width:90%;max-width:440px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:10px;z-index:40}
+.moreBox a{display:block;padding:14px;border-bottom:1px solid #eee;text-decoration:none;color:#111;font-weight:700}
 </style>
 </head>
 <body>
 <div class="top"><div class="bell">🔔</div><b>Motors <span>Egypt</span></b><b>🚗</b></div>
-<div class="search">⚙️<input placeholder="دور على عربيتك"><span>🔍</span></div>
-<div class="pills"><button class="on" onclick="pill(this)">الكل</button><button onclick="pill(this)">كسر زيرو</button><button onclick="pill(this)">مستعمل</button><button onclick="pill(this)">زيرو</button></div>
+<div class="search">⚙️<input id="searchInput" oninput="doSearch()" placeholder="دور على عربيتك"><span>🔍</span></div>
+<div class="pills"><button class="on" onclick="pill(this,'الكل')">الكل</button><button onclick="pill(this,'كسر زيرو')">كسر زيرو</button><button onclick="pill(this,'مستعمل')">مستعمل</button><button onclick="pill(this,'زيرو')">زيرو</button></div>
 <h2 class="sec">ماركات السيارات</h2>
 <div class="brands">
 <div class="brand"><img src="https://cdn.worldvectorlogo.com/logos/toyota-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">T</div><p>Toyota</p></div>
@@ -86,18 +95,38 @@ nav a.active{color:#00AA06;font-weight:900}
 <div class="brand"><img src="https://cdn.worldvectorlogo.com/logos/alfa-romeo-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">Alfa</div><p>Alfa Romeo</p></div>
 <div class="brand"><img src="https://cdn.worldvectorlogo.com/logos/range-rover-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">RR</div><p>Range Rover</p></div>
 </div>
-<h2 class="sec">أحدث العربيات</h2>
-<div class="grid">
-<div class="card"><img src="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800"><div class="cb"><h3>Toyota Corolla 2023</h3><div class="price">جنيه 850,000</div><div class="meta">📍 القاهرة • 2023 • أوتوماتيك</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"><div class="cb"><h3>Hyundai Tucson 2022</h3><div class="price">جنيه 1,250,000</div><div class="meta">📍 الجيزة • 2022 • أوتوماتيك</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800"><div class="cb"><h3>Kia Sportage 2021</h3><div class="price">جنيه 980,000</div><div class="meta">📍 الإسكندرية • 2021 • أوتوماتيك</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800"><div class="cb"><h3>Nissan Sunny 2022</h3><div class="price">جنيه 620,000</div><div class="meta">📍 المنصورة • 2022 • يدوي</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=800"><div class="cb"><h3>Mercedes C180 2021</h3><div class="price">جنيه 1,850,000</div><div class="meta">📍 القاهرة • 2021 • أوتوماتيك</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
-<div class="card"><img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800"><div class="cb"><h3>BMW 320i 2022</h3><div class="price">جنيه 1,950,000</div><div class="meta">📍 الجيزة • 2022 • أوتوماتيك</div><a class="wa" href="https://wa.me/201000000000">واتساب</a></div></div>
+
+<h2 class="sec" id="carsTitle">أحدث العربيات</h2>
+<div class="grid" id="carsGrid"></div>
+<div id="noResult" style="display:none;text-align:center;padding:20px;color:#777">مفيش عربيات في القسم ده لسه 😅</div>
+
+<h2 class="sec">المعارض 🏢</h2>
+<p style="padding:0 16px 10px;color:#777;font-size:13px">دوس على أي معرض عشان تشوف صفحته وعربياته</p>
+<div id="showsList"></div>
+
+<div class="cta" onclick="om()">+ اعرض عربيتك الآن - أفراد ومعارض</div>
+<div class="cta" style="background:#111" onclick="om2()">+ سجل معرضك مجانا</div>
+
+<div class="moreBox" id="moreBox">
+<a href="#" onclick="goHome();return false">🏠 الرئيسية - الكل</a>
+<a href="#" onclick="filterNav('مستعمل');return false">🚗 مستعملة</a>
+<a href="#" onclick="filterNav('زيرو');return false">🚙 جديدة - زيرو</a>
+<a href="#" onclick="filterNav('كسر زيرو');return false">✨ كسر زيرو</a>
+<a href="#" onclick="om();return false">➕ أضف إعلان</a>
+<a href="#" onclick="closeMore();return false" style="text-align:center;color:#00AA06">❌ إغلاق</a>
 </div>
-<div class="cta" onclick="om()">+ اعرض عربيتك الآن</div>
-<nav><a href="#" class="active">🏠<br>الرئيسية</a><a href="#">🚗<br>مستعملة</a><a href="#" onclick="om()">➕<br>أضف إعلان</a><a href="#">🚙<br>جديدة</a><a href="#">☰<br>المزيد</a></nav>
-<div class="modal" id="modal"><div class="mb"><h2>أضف عربيتك</h2><p style="color:#777;font-size:13px;margin:6px 0 14px">املأ بيانات العربية وهننشرها</p>
+
+<nav>
+<a id="navHome" class="active" onclick="goHome()">🏠<br>الرئيسية</a>
+<a id="navUsed" onclick="filterNav('مستعمل')">🚗<br>مستعملة</a>
+<a onclick="om()">➕<br>أضف إعلان</a>
+<a id="navNew" onclick="filterNav('زيرو')">🚙<br>جديدة</a>
+<a id="navMore" onclick="toggleMore()">☰<br>المزيد</a>
+</nav>
+
+<div class="modal" id="modal" onclick="if(event.target==this)cm()"><div class="mb"><h2>أضف عربيتك <span style="float:left;cursor:pointer" onclick="cm()">❌</span></h2>
+<label>انت مين؟</label><select id="sellerType"><option>شخص - فرد</option><option>معرض</option></select>
+<label>اسمك / اسم المعرض</label><input id="sellerName" placeholder="مثال: أحمد / معرض النور">
 <label>الماركة</label><select id="b"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Nissan</option><option>MG</option><option>Chevrolet</option><option>BMW</option><option>Mercedes</option><option>Renault</option><option>Audi</option><option>Volkswagen</option><option>Ford</option><option>Peugeot</option><option>Citroen</option><option>Fiat</option><option>Honda</option><option>Mazda</option><option>Mitsubishi</option><option>Suzuki</option><option>Skoda</option><option>Seat</option><option>Volvo</option><option>Land Rover</option><option>Range Rover</option><option>Jeep</option><option>Dodge</option><option>Porsche</option><option>Lexus</option><option>Infiniti</option><option>Subaru</option><option>Opel</option><option>BYD</option><option>Chery</option><option>Geely</option><option>Haval</option><option>Changan</option><option>Tesla</option><option>Mini</option><option>Jaguar</option><option>Alfa Romeo</option></select>
 <label>الموديل</label><input id="m" placeholder="مثال: Corolla">
 <label>السنة</label><input id="y" type="number" placeholder="2023">
@@ -106,14 +135,61 @@ nav a.active{color:#00AA06;font-weight:900}
 <label>المدينة</label><select id="c"><option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>المنصورة</option><option>الزقازيق</option><option>الحسينية</option></select>
 <label>الحالة</label><select id="k"><option>مستعمل</option><option>كسر زيرو</option><option>زيرو</option></select>
 <label>واتساب</label><input id="w" placeholder="01xxxxxxxxx">
-<button onclick="add()">انشر الإعلان</button><button style="background:#eee;margin-top:8px" onclick="cm()">إلغاء</button></div></div>
+<button onclick="add()">انشر الإعلان ✅</button><button class="closeBtn" onclick="cm()">إلغاء - رجوع للرئيسية</button></div></div>
+
+<div class="modal" id="modal2" onclick="if(event.target==this)cm2()"><div class="mb"><h2>سجل معرضك <span style="float:left;cursor:pointer" onclick="cm2()">❌</span></h2><label>اسم المعرض</label><input id="showNameIn" placeholder="مثال: معرض النور"><label>المدينة</label><input id="showCityIn" placeholder="مثال: الزقازيق"><label>رقم الواتساب</label><input id="showPhoneIn" placeholder="01xxxxxxxxx"><button onclick="addShowroom()">سجل المعرض ✅</button><button class="closeBtn" onclick="cm2()">إلغاء</button></div></div>
+
+<div class="modal" id="showModal" onclick="if(event.target==this)closeShow()"><div class="mb"><h2 id="showName">المعرض <span style="float:left;cursor:pointer" onclick="closeShow()">❌</span></h2><p id="showInfo" style="color:#777;font-size:14px;margin:10px 0"></p><div id="showCars" style="background:#F6F7F9;padding:14px;border-radius:12px;margin:10px 0"></div><a id="showWa" href="#" class="wa" style="padding:12px">كلم المعرض واتساب 📱</a><button class="closeBtn" onclick="closeShow()">رجوع للرئيسية</button></div></div>
+
 <script>
-function pill(el){document.querySelectorAll('.pills button').forEach(b=>b.classList.remove('on'));el.classList.add('on')}
-function om(){document.getElementById('modal').classList.add('open')}
-function cm(){document.getElementById('modal').classList.remove('open')}
-function add(){alert('تم استلام إعلانك ✅');cm()}
-var cities={"مصر":["القاهرة","الجيزة","الإسكندرية","المنصورة","الزقازيق","الحسينية","طنطا","أسيوط","أسوان","بورسعيد"],"السعودية":["الرياض","جدة","مكة","المدينة","الدمام","الخبر","أبها","تبوك"],"الإمارات":["دبي","أبوظبي","الشارقة","عجمان","رأس الخيمة","الفجيرة","أم القيوين"],"الكويت":["مدينة الكويت","حولي","الفروانية","الأحمدي","الجهراء","مبارك الكبير"],"قطر":["الدوحة","الريان","الوكرة","الخور","أم صلال"],"البحرين":["المنامة","المحرق","الرفاع","مدينة حمد","مدينة عيسى"],"عمان":["مسقط","صلالة","صحار","نزوى","صور","البريمي"],"الأردن":["عمان","إربد","الزرقاء","العقبة","الكرك","معان"],"لبنان":["بيروت","طرابلس","صيدا","صور","زحلة","بعلبك"],"سوريا":["دمشق","حلب","حمص","حماة","اللاذقية","طرطوس"],"العراق":["بغداد","البصرة","أربيل","الموصل","النجف","كربلاء"],"اليمن":["صنعاء","عدن","تعز","الحديدة","المكلا","إب"],"فلسطين":["غزة","رام الله","الخليل","نابلس","بيت لحم","جنين"],"ليبيا":["طرابلس","بنغازي","مصراتة","البيضاء","سبها","الزاوية"],"تونس":["تونس","صفاقس","سوسة","القيروان","بنزرت","قابس"],"الجزائر":["الجزائر","وهران","قسنطينة","عنابة","سطيف","بجاية"],"المغرب":["الدار البيضاء","الرباط","فاس","مراكش","أكادير","طنجة"],"موريتانيا":["نواكشوط","نواذيبو","كيفة","روصو"],"السودان":["الخرطوم","أم درمان","بورتسودان","كسلا","الأبيض"],"الصومال":["مقديشو","هرجيسا","بوصاصو","كيسمايو"],"جيبوتي":["جيبوتي","علي صبيح","تاجورة","أوبوك"],"جزر القمر":["موروني","موتسامودو","فومبوني"]};
-function updCity(){var co=document.getElementById('country').value;var sel=document.getElementById('c');var list=cities[co]||["العاصمة"];sel.innerHTML=list.map(function(x){return "<option>"+x+"</option>"}).join("")}
-</script>
-</body>
-</html>
+// بيانات البداية
+var defaultCars=[
+{name:"Toyota Corolla 2023",price:850000,city:"القاهرة",year:2023,kind:"مستعمل",seller:"شخص - فرد",sellerName:"أحمد",wa:"01000000000",img:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800"},
+{name:"Hyundai Tucson 2022",price:1250000,city:"الجيزة",year:2022,kind:"مستعمل",seller:"معرض",sellerName:"معرض النور",wa:"01000000001",img:"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"},
+{name:"Kia Sportage 2021",price:980000,city:"الإسكندرية",year:2021,kind:"كسر زيرو",seller:"شخص - فرد",sellerName:"محمد",wa:"01000000000",img:"https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800"},
+{name:"Nissan Sunny 2022",price:620000,city:"المنصورة",year:2022,kind:"مستعمل",seller:"معرض",sellerName:"معرض الأصدقاء",wa:"01000000002",img:"https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=800"},
+{name:"Mercedes C180 2021",price:1850000,city:"القاهرة",year:2021,kind:"زيرو",seller:"معرض",sellerName:"معرض النور",wa:"01000000001",img:"https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=800"},
+{name:"BMW 320i 2022",price:1950000,city:"الجيزة",year:2022,kind:"زيرو",seller:"شخص - فرد",sellerName:"عمر",wa:"01000000000",img:"https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800"}
+];
+var defaultShows=[
+{name:"معرض النور موتورز",city:"القاهرة - مدينة نصر",phone:"01000000001",count:"12 عربية",rate:"4.8"},
+{name:"معرض الأصدقاء",city:"الجيزة - فيصل",phone:"01000000002",count:"8 عربيات",rate:"4.6"},
+{name:"معرض الزقازيق أوتو",city:"الشرقية - الزقازيق",phone:"01000000003",count:"15 عربية",rate:"4.9"},
+{name:"معرض الحسينية كار",city:"الشرقية - الحسينية",phone:"01000000004",count:"6 عربيات",rate:"4.7"}
+];
+var cars=JSON.parse(localStorage.getItem('motors_cars')||'null')||defaultCars;
+var shows=JSON.parse(localStorage.getItem('motors_shows')||'null')||defaultShows;
+function save(){localStorage.setItem('motors_cars',JSON.stringify(cars));localStorage.setItem('motors_shows',JSON.stringify(shows))}
+function renderCars(filter){
+  var grid=document.getElementById('carsGrid');grid.innerHTML='';
+  var list=cars.filter(c=>!filter||filter=='الكل'||c.kind==filter);
+  document.getElementById('noResult').style.display=list.length==0?'block':'none';
+  list.forEach(c=>{
+    var d=document.createElement('div');d.className='card';d.dataset.kind=c.kind;
+    d.innerHTML='<img src="'+c.img+'"><div class="cb"><h3>'+c.name+'</h3><div class="price">جنيه '+c.price.toLocaleString()+'</div><div class="meta">📍 '+c.city+' • '+c.year+' • '+c.kind+'</div><span class="badge '+(c.seller=='معرض'?'badge2':'')+'">'+(c.seller=='معرض'?'🏢 '+c.sellerName:'👤 '+c.sellerName)+'</span><a class="wa" href="https://wa.me/2'+c.wa+'">واتساب</a></div>';
+    grid.appendChild(d);
+  });
+}
+function renderShows(){
+  var box=document.getElementById('showsList');box.innerHTML='';
+  shows.forEach((s,i)=>{
+    var d=document.createElement('div');d.className='showCard';
+    d.onclick=function(){openShow(i)};
+    d.innerHTML='<div class="ico">🏢</div><div style="flex:1"><b>'+s.name+'</b><span>📍 '+s.city+' • '+s.count+'</span><br><span>⭐ '+s.rate+' • موثق ✅</span></div><div>›</div>';
+    box.appendChild(d);
+  });
+}
+function openShow(i){
+  var s=shows[i];
+  document.getElementById('showName').innerHTML=s.name+' <span style="float:left;cursor:pointer" onclick="closeShow()">❌</span>';
+  document.getElementById('showInfo').innerText='📍 '+s.city+' • ⭐ '+s.rate;
+  var sc=cars.filter(c=>c.sellerName==s.name);
+  var html='<b>عربيات المعرض:</b><br><br>';
+  if(sc.length==0)html+='لسه مفيش عربيات مضافة للمعرض ده، بس تقدر تكلمه واتساب وتسأله';
+  sc.forEach(c=>{html+='• '+c.name+' - '+c.price.toLocaleString()+' جنيه<br>'});
+  document.getElementById('showCars').innerHTML=html;
+  document.getElementById('showWa').href='https://wa.me/2'+s.phone;
+  document.getElementById('showModal').classList.add('open');
+}
+function closeShow(){document.getElementById('showModal').classList.remove('open')}
+function setActiveNav(id){document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));if(id)document.get
