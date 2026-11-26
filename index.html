@@ -1,302 +1,139 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Motors Egypt</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
-body{background:#fff;max-width:480px;margin:auto;padding-bottom:90px}
-.top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:6px}
-.top b{font-size:20px}.top b span{color:#00AA06}
-.countrySel{border:1px solid #ddd;border-radius:20px;padding:6px 8px;font-size:13px;font-weight:700;background:#F6F7F9}
-.langBtn{border:1px solid #00AA06;background:#E8F5E9;color:#00AA06;padding:7px 14px;border-radius:20px;font-weight:900;font-size:13px;cursor:pointer;white-space:nowrap}
-.bellWrap{position:relative;width:40px;height:40px;border:1px solid #ddd;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
-.bellWrap.show{display:flex}
-.bellBadge{position:absolute;top:-4px;right:-4px;background:#E53935;color:#fff;font-size:11px;min-width:20px;height:20px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 4px;font-weight:900}
-.ownerHint{display:none;background:#111;color:#fff;text-align:center;padding:8px;font-size:12px}
-.ownerHint.show{display:block}
-.search{background:#F6F7F9;border-radius:12px;display:flex;padding:13px;gap:8px;margin:0 16px;align-items:center}
-.search input{flex:1;border:none;outline:none;background:transparent;font-size:15px}
-.pills{display:flex;gap:8px;padding:14px 16px;overflow-x:auto;white-space:nowrap}
-.pills button{border:1px solid #ddd;background:#fff;padding:9px 18px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer}
-.pills button.on{background:#00AA06;color:#fff;border-color:#00AA06}
-.sec{padding:6px 16px;font-size:20px;font-weight:900}
-.brands{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:10px 16px}
-.brand{background:#fff;border:1px solid #eee;border-radius:14px;padding:12px 4px;text-align:center;min-height:92px;cursor:pointer}
-.brand img{width:100%;height:38px;object-fit:contain}
-.letter{display:none;width:100%;height:38px;align-items:center;justify-content:center;font-weight:900;font-size:22px;background:#F6F7F9;border-radius:8px}
-.brand p{font-size:12px;font-weight:700;margin-top:8px}
-.grid{padding:10px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);background:#fff}
-.card img{width:100%;height:110px;object-fit:cover;display:block}
-.cb{padding:10px}.cb h3{font-size:14px}
-.price{color:#00AA06;font-weight:900;font-size:15px;margin-top:4px}
-.meta{color:#555;font-size:11px;margin-top:4px}
-.wa{display:block;text-align:center;background:#00AA06;color:#fff;text-decoration:none;padding:8px;border-radius:10px;font-weight:800;font-size:13px;margin-top:8px}
-.cta{margin:16px;background:#00AA06;color:#fff;text-align:center;padding:14px;border-radius:14px;font-weight:900;cursor:pointer}
-.showCard{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center;margin:0 16px 10px;cursor:pointer}
-.showCard.gold{border:2px solid #FFC107;background:#FFFDE7}
-.showCard.plat{border:2px solid #00BCD4;background:#E0F7FA}
-.showCard .ico{width:56px;height:56px;background:#E8F5E9;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
-.showCard b{font-size:16px;display:block}
-.showCard span{color:#777;font-size:12px}
-.badge{display:inline-block;background:#E8F5E9;color:#00AA06;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700;margin-top:4px}
-.badgeGold{background:#FFECB3;color:#FF6F00}
-.badgePlat{background:#B2EBF2;color:#006064}
-.badgeSingle{background:#E3F2FD;color:#1565C0}
-.pkg{border:2px solid #eee;border-radius:16px;padding:16px;margin:10px 0;text-align:center;cursor:pointer;background:#fff}
-.pkg.sel{border-color:#00AA06;background:#E8F5E9}
-.pkg h3{font-size:18px}.pkg .pr{font-size:22px;font-weight:900;color:#00AA06;margin:6px 0}.pkg p{color:#555;font-size:13px;line-height:1.7}
-.payBox{background:#E8F5E9;border:2px dashed #00AA06;border-radius:14px;padding:14px;margin:10px 0}
-.payRow{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px;border-radius:10px;margin:6px 0}
-.payRow b{font-size:15px}.payRow span{color:#555;font-size:13px}
-.copyBtn{background:#111 !important;color:#fff !important;width:auto !important;padding:6px 12px !important;font-size:12px !important}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:8px 0;z-index:20}
-nav a{text-decoration:none;color:#777;text-align:center;font-size:12px;line-height:1.5;cursor:pointer}
-nav a.active{color:#00AA06;font-weight:900}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:30;align-items:end}
-.modal.open{display:flex}
-.mb{background:#fff;width:100%;max-width:480px;margin:auto;border-radius:24px 24px 0 0;padding:20px;max-height:92vh;overflow:auto}
-.mb input,.mb select{width:100%;border:1px solid #ddd;border-radius:12px;padding:12px;margin:6px 0 12px}
-.mb button{width:100%;background:#00AA06;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900}
-.closeBtn{background:#eee !important;color:#111 !important;margin-top:8px}
-.moreBox{display:none;position:fixed;bottom:70px;left:50%;transform:translateX(-50%);width:90%;max-width:440px;background:#fff;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:10px;z-index:40}
-.moreBox a{display:block;padding:14px;border-bottom:1px solid #eee;text-decoration:none;color:#111;font-weight:700}
-.pending{border:1px dashed #FF9800;background:#FFF8E1;padding:12px;border-radius:12px;margin:8px 0}
-.pending button{width:48% !important;display:inline-block !important;margin:4px 1% !important;padding:10px !important}
-.ownerBox{background:#111;color:#fff;padding:14px;border-radius:14px;margin:10px 0}
-.ownerBox input{background:#fff;color:#111}
-.notifItem{background:#fff;border:1px solid #eee;border-radius:12px;padding:12px;margin:8px 0}
-.modelBtn{border:1px solid #ddd;background:#fff;padding:8px 16px;border-radius:20px;font-weight:700;margin-left:6px;cursor:pointer;white-space:nowrap}
-.modelBtn.on{background:#00AA06;color:#fff;border-color:#00AA06}
-</style>
-</head>
-<body>
-<div class="ownerHint" id="ownerHint">انت داخل كمالك - <span onclick="ownerLogout()" style="text-decoration:underline;cursor:pointer">خروج</span></div>
-<div class="top"><div style="display:flex;gap:6px;align-items:center"><span onclick="ownerLogin()" style="font-size:22px;cursor:pointer">🚗</span><div class="bellWrap" id="bellWrap" onclick="openNotif()">🔔<span class="bellBadge" id="bellBadge">0</span></div></div><b>Motors <span id="logoCountry">Egypt</span></b><div style="display:flex;gap:6px;align-items:center"><button class="langBtn" id="langBtn" type="button">EN</button><select class="countrySel" id="countrySel" onchange="changeCountry(this.value)"><option value="مصر">🇪🇬 مصر</option><option value="السعودية">🇸🇦 السعودية</option><option value="الإمارات">🇦🇪 الإمارات</option><option value="الكويت">🇰🇼 الكويت</option><option value="قطر">🇶🇦 قطر</option><option value="الأردن">🇯🇴 الأردن</option><option value="ليبيا">🇱🇾 ليبيا</option></select></div></div>
-<div class="search">⚙️<input id="searchInput" oninput="doSearch()" placeholder="دور على عربيتك"><span>🔍</span></div>
-<div class="pills"><button class="on" id="pillAll" onclick="pill(this,'الكل')" data-t="all">الكل</button><button onclick="pill(this,'كسر زيرو')" data-t="nearNew">كسر زيرو</button><button onclick="pill(this,'مستعمل')" data-t="used">مستعمل</button><button onclick="pill(this,'زيرو')" data-t="new">زيرو</button></div>
-<h2 class="sec" data-t="brandsTitle">ماركات السيارات</h2>
-<div class="brands">
-<div class="brand" onclick="filterBrand('Toyota')"><img src="https://cdn.worldvectorlogo.com/logos/toyota-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">T</div><p>Toyota</p></div>
-<div class="brand" onclick="filterBrand('Hyundai')"><img src="https://cdn.worldvectorlogo.com/logos/hyundai-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">H</div><p>Hyundai</p></div>
-<div class="brand" onclick="filterBrand('Kia')"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Kia_logo.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">KIA</div><p>Kia</p></div>
-<div class="brand" onclick="filterBrand('Nissan')"><img src="https://cdn.worldvectorlogo.com/logos/nissan-6.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">N</div><p>Nissan</p></div>
-<div class="brand" onclick="filterBrand('Mazda')"><img src="https://cdn.worldvectorlogo.com/logos/mazda-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">MAZDA</div><p>Mazda</p></div>
-<div class="brand" onclick="filterBrand('Mercedes')"><img src="https://cdn.worldvectorlogo.com/logos/mercedes-benz-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">M</div><p>Mercedes</p></div>
-<div class="brand" onclick="filterBrand('BMW')"><img src="https://cdn.worldvectorlogo.com/logos/bmw-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">BMW</div><p>BMW</p></div>
-<div class="brand" onclick="filterBrand('Renault')"><img src="https://cdn.worldvectorlogo.com/logos/renault-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">R</div><p>Renault</p></div>
-<div class="brand" onclick="filterBrand('Chevrolet')"><img src="https://cdn.worldvectorlogo.com/logos/chevrolet-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">C</div><p>Chevrolet</p></div>
-<div class="brand" onclick="filterBrand('MG')"><img src="https://cdn.worldvectorlogo.com/logos/mg-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">MG</div><p>MG</p></div>
-<div class="brand" onclick="filterBrand('Audi')"><img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">AUDI</div><p>Audi</p></div>
-<div class="brand" onclick="filterBrand('Volkswagen')"><img src="https://cdn.worldvectorlogo.com/logos/volkswagen-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">VW</div><p>Volkswagen</p></div>
-<div class="brand" onclick="filterBrand('Ford')"><img src="https://cdn.worldvectorlogo.com/logos/ford-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">Ford</div><p>Ford</p></div>
-<div class="brand" onclick="filterBrand('Peugeot')"><img src="https://cdn.worldvectorlogo.com/logos/peugeot-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">P</div><p>Peugeot</p></div>
-<div class="brand" onclick="filterBrand('Suzuki')"><img src="https://cdn.worldvectorlogo.com/logos/suzuki-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">S</div><p>Suzuki</p></div>
-<div class="brand" onclick="filterBrand('BYD')"><img src="https://cdn.worldvectorlogo.com/logos/byd-1.svg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="letter">BYD</div><p>BYD</p></div>
+<!-- ===== تسجيل معرض اتوماتيك ===== -->
+<div id="showReg" style="background:#fff;padding:16px;border-radius:16px;margin:16px">
+<h3>🏢 سجل معرضك لنفسك</h3>
+<input id="s_name" placeholder="اسم المعرض" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<input id="s_city" placeholder="المدينة - مثال: القاهرة" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<input id="s_phone" placeholder="رقم الواتساب 01xxxxxxxxx" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+
+<label>🔐 اختار الباسورد بتاعك</label>
+<input id="s_pass" placeholder="مثال: nour123" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<button onclick="autoPass()" style="width:100%;background:#111;color:#fff;padding:10px;border-radius:12px">🎲 ولدلي باسورد اتوماتيك</button>
+
+<label>🔑 الرقم السري - 4 ارقام</label>
+<input id="s_pin" placeholder="مثال: 4582" maxlength="4" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<button onclick="autoPin()" style="width:100%;background:#111;color:#fff;padding:10px;border-radius:12px">🎲 ولدلي رقم سري اتوماتيك</button>
+
+<label>💳 طريقة الدفع اللي الناس هتحولك عليها ثمن العربية</label>
+<select id="s_payType" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<option>فودافون كاش</option>
+<option>انستاباي</option>
+<option>تحويل بنكي</option>
+<option>فودافون كاش + انستاباي</option>
+</select>
+<input id="s_wallet" placeholder="رقم المحفظة / رقم الحساب - اللي هيتحول عليه الملايين" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<input id="s_bankName" placeholder="اسم المحفظة / اسم البنك - اختياري" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+
+<label>📦 اختار باقتك</label>
+<select id="s_pkg" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<option>شهري - 500ج</option>
+<option>3 شهور - 1200ج</option>
+<option>سنة - 4000ج</option>
+</select>
+
+<button onclick="registerShowroom()" style="width:100%;background:#00AA06;color:#fff;padding:14px;border-radius:12px;font-weight:900">سجل معرضي ✅</button>
+<p style="font-size:12px;color:#777;text-align:center;margin-top:8px">معرضك مش هيظهر غير لما المالك يوافق عليه</p>
 </div>
-<h2 class="sec"><span data-t="latest">أحدث العربيات</span> - <span id="carsCountryLabel">مصر</span></h2>
-<div id="modelsBar" style="display:none;padding:0 16px 10px;overflow-x:auto;white-space:nowrap"></div>
-<div class="grid" id="carsGrid"></div>
-<div style="text-align:center;margin:0 16px 10px"><button onclick="goHome()" style="border:1px solid #00AA06;background:#E8F5E9;color:#00AA06;padding:8px 20px;border-radius:20px;font-weight:800;cursor:pointer" data-t="showAll">عرض كل الماركات ✖️</button></div>
-<h2 class="sec"><span data-t="showrooms">المعارض 🏢</span> - <span id="showsCountryLabel">مصر</span></h2>
-<div id="showsList"></div>
-<h2 class="sec"><span data-t="packages">باقات المعارض 💰</span> - <span id="pkgsCountryLabel">مصر</span></h2>
-<div style="padding:0 16px" id="pkgsBox"></div>
-<div class="cta" onclick="om()" data-t="listCar">+ اعرض عربيتك الآن - باقة عربية واحدة</div>
-<div class="cta" style="background:#111" onclick="om2()" data-t="registerShow">+ سجل معرضك - اختار باقتك</div>
-<div class="moreBox" id="moreBox"><a href="#" onclick="goHome();return false">🏠 الرئيسية</a><a href="#" onclick="filterNav('مستعمل');return false">🚗 مستعملة</a><a href="#" onclick="filterNav('زيرو');return false">🚙 جديدة</a><a href="#" onclick="om();return false">➕ أضف إعلان</a><a href="#" onclick="closeMore();return false" style="text-align:center;color:#00AA06">❌ إغلاق</a></div>
-<nav><a id="navHome" class="active" onclick="goHome()">🏠<br><span data-t="navHome">الرئيسية</span></a><a id="navUsed" onclick="filterNav('مستعمل')">🚗<br><span data-t="navUsed">مستعملة</span></a><a onclick="om()">➕<br><span data-t="navAdd">أضف إعلان</span></a><a id="navNew" onclick="filterNav('زيرو')">🚙<br><span data-t="navNew">جديدة</span></a><a id="navMore" onclick="toggleMore()">☰<br><span data-t="navMore">المزيد</span></a></nav>
 
-<div class="modal" id="modal" onclick="if(event.target==this)cm()"><div class="mb"><h2>اعرض عربيتك - <span id="addCarCountry"></span> <span style="float:left;cursor:pointer" onclick="cm()">❌</span></h2><p style="background:#E3F2FD;padding:10px;border-radius:10px;font-size:13px">💰 باقة عربية واحدة في <span id="addCarCountry2"></span>: <b id="singlePriceLabel"></b></p><label>الدولة</label><select id="carCountry" onchange="updateCityList()"></select><label>انت مين؟</label><select id="sellerType"><option>شخص - فرد</option><option>معرض</option></select><label>اسمك / اسم المعرض</label><input id="sellerName" placeholder="مثال: أحمد"><label>الماركة</label><select id="b" onchange="updateModelList()"><option>Toyota</option><option>Hyundai</option><option>Kia</option><option>Nissan</option><option>Mazda</option><option>MG</option><option>Chevrolet</option><option>BMW</option><option>Mercedes</option><option>Renault</option><option>Audi</option><option>Volkswagen</option><option>Ford</option><option>Peugeot</option><option>Suzuki</option><option>BYD</option></select><label>الموديل</label><select id="m"></select><label>السنة</label><input id="y" type="number" placeholder="2023"><label>السعر - <span id="currencyLabel">جنيه</span></label><input id="p" type="number" placeholder="850000"><label>المدينة</label><select id="c"></select><label>الحالة</label><select id="k"><option>مستعمل</option><option>كسر زيرو</option><option>زيرو</option></select><label>واتساب</label><input id="w" placeholder="01xxxxxxxxx"><button onclick="add()">التالي - ادفع بالطريقة اللي تناسبك 💳</button><button class="closeBtn" onclick="cm()">إلغاء</button></div></div>
-<div class="modal" id="modal2" onclick="if(event.target==this)cm2()"><div class="mb"><h2>سجل معرضك - <span id="addShowCountry"></span> <span style="float:left;cursor:pointer" onclick="cm2()">❌</span></h2><label>الدولة</label><select id="showCountry" onchange="updateShowCityList()"></select><label>اسم المعرض</label><input id="showNameIn" placeholder="مثال: معرض النور"><label>المدينة</label><select id="showCityIn"></select><label>رقم الواتساب</label><input id="showPhoneIn" placeholder="01xxxxxxxxx"><label>اختار الباقة</label><select id="showPkg"></select><button onclick="addShowroom()">التالي - ادفع بالطريقة اللي تناسبك 💳</button><button class="closeBtn" onclick="cm2()">إلغاء</button></div></div>
-<div class="modal" id="payModal" onclick="if(event.target==this)closePay()"><div class="mb"><h2>ادفع بالطريقة اللي تناسبك 💳 <span style="float:left;cursor:pointer" onclick="closePay()">❌</span></h2><p id="payTitle" style="background:#E8F5E9;padding:12px;border-radius:10px;font-weight:700"></p><p style="font-size:13px;color:#555;margin:10px 0">1- حوّل المبلغ لأي طريقة من دول<br>2- اكتب رقم العملية اللي هيجيلك في رسالة التحويل<br>3- دوس تأكيد، وهيتم مراجعة الدفع وتفعيلك</p><div class="payBox"><b>ادفع بالطريقة اللي تناسبك:</b><div class="payRow"><div><b id="payName1">فودافون كاش</b><br><span id="payVodaNum">01000000000</span></div><button class="copyBtn" onclick="copyPay(1)">نسخ</button></div><div class="payRow"><div><b id="payName2">انستا باي</b><br><span id="payInstaNum">01000000000</span></div><button class="copyBtn" onclick="copyPay(2)">نسخ</button></div><div class="payRow"><div><b id="payName3">تحويل بنكي</b><br><span id="payBankNum">رقم الحساب</span></div><button class="copyBtn" onclick="copyPay(3)">نسخ</button></div></div><label>اختار طريقة الدفع اللي دفعت بيها</label><select id="payMethod"></select><label>رقم العملية / رقم التحويل</label><input id="payRef" placeholder="مثال: 123456789"><button onclick="confirmPay()">تأكيد الدفع ✅</button><button class="closeBtn" onclick="closePay()">إلغاء</button></div></div>
-<div class="modal" id="showModal" onclick="if(event.target==this)closeShow()"><div class="mb"><h2 id="showName">المعرض <span style="float:left;cursor:pointer" onclick="closeShow()">❌</span></h2><p id="showInfo" style="color:#777;font-size:14px;margin:10px 0"></p><div id="showCars" style="background:#F6F7F9;padding:14px;border-radius:12px;margin:10px 0"></div><a id="showWa" href="#" class="wa" style="padding:12px">كلم المعرض واتساب 📱</a><button class="closeBtn" onclick="closeShow()">رجوع</button></div></div>
-<div class="modal" id="notifModal" onclick="if(event.target==this)closeNotif()"><div class="mb"><h2>إشعاراتك 🔔 <span style="float:left;cursor:pointer" onclick="closeNotif()">❌</span></h2><div id="notifList"></div><button class="closeBtn" onclick="closeNotif()">إغلاق</button></div></div>
-<div class="modal" id="ownerModal" onclick="if(event.target==this)closeOwner()"><div class="mb"><h2>لوحة التحكم 👑 <span style="float:left;cursor:pointer" onclick="closeOwner()">❌</span></h2><div class="ownerBox"><b>⚙️ الأسعار</b><br><br><label style="color:#fff">سعر عربية واحدة</label><input id="singlePriceIn" type="number"><label style="color:#fff">سعر الذهبي</label><input id="goldPriceIn" type="number"><label style="color:#fff">سعر البلاتيني</label><input id="platPriceIn" type="number"><label style="color:#fff">كلمة السر</label><input id="newPassIn" placeholder="سيبها فاضية لو مش عايز تغير"><button onclick="saveSettings()">💾 حفظ الأسعار</button></div><div class="ownerBox"><b>💳 طرق الدفع</b><br><br><label style="color:#fff">اسم المحفظة 1</label><input id="payNameIn1" placeholder="فودافون كاش"><label style="color:#fff">رقم المحفظة 1</label><input id="vodaIn" placeholder="01xxxxxxxxx"><label style="color:#fff">اسم المحفظة 2</label><input id="payNameIn2" placeholder="انستا باي"><label style="color:#fff">رقم المحفظة 2</label><input id="instaIn" placeholder="01xxxxxxxxx"><label style="color:#fff">اسم المحفظة 3</label><input id="payNameIn3" placeholder="تحويل بنكي"><label style="color:#fff">رقم المحفظة 3</label><input id="bankIn" placeholder="رقم الحساب"><button onclick="savePaySettings()">💾 حفظ طرق الدفع</button></div><h3>طلبات عربيات - مستني الدفع ⏳</h3><div id="pendingCarsList"></div><h3>طلبات معارض - مستني الدفع ⏳</h3><div id="pendingList"></div><h3>المعارض المعتمدة ✅</h3><div id="approvedList"></div><button class="closeBtn" onclick="closeOwner()">إغلاق</button></div></div>
+<!-- ===== المعرض يضيف عربيته بنفسه ===== -->
+<div id="showAddCar" style="display:none;background:#FFF8E1;padding:16px;border-radius:16px;margin:16px">
+<h3>➕ ضيف عربية لمعرضك</h3>
+<input id="c_title" placeholder="اسم العربية - مثال: تويوتا كورولا 2023" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<input id="c_price" type="number" placeholder="السعر - مثال: 1200000" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<input id="c_img" placeholder="لينك صورة العربية" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<input id="c_year" placeholder="السنة" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<button onclick="addShowCar()" style="width:100%;background:#00AA06;color:#fff;padding:14px;border-radius:12px;font-weight:900">انشر العربية في صفحتي ✅</button>
+</div>
+
+<!-- ===== المشتري يدفع ثمن العربية للمعرض ===== -->
+<div id="buyBox" style="display:none;background:#E8F5E9;padding:16px;border-radius:16px;margin:16px">
+<h3 id="buyTitle">💳 ادفع ثمن العربية</h3>
+<p id="buyInfo" style="font-size:14px;margin:8px 0"></p>
+<div id="buyPayInfo" style="background:#fff;padding:12px;border-radius:12px;font-size:14px"></div>
+<label>رقم العملية بعد التحويل</label>
+<input id="payRef" placeholder="اكتب رقم العملية اللي طلعلك بعد التحويل" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<button onclick="confirmPay()" style="width:100%;background:#111;color:#fff;padding:14px;border-radius:12px;font-weight:900">بعت الفلوس ✅ ابعت تأكيد للمعرض</button>
+<p style="font-size:11px;color:#777;text-align:center">⚠️ اتأكد انك بتحول على رقم المعرض الرسمي اللي ظاهر فوق، مش أي رقم تاني</p>
+</div>
 
 <script>
-if(location.search.indexOf('reset')>-1){localStorage.clear();location.href=location.pathname;}
-var currentLang=localStorage.getItem('motors_lang')||'ar';
-var T={
-ar:{all:'الكل',nearNew:'كسر زيرو',used:'مستعمل',new:'زيرو',brandsTitle:'ماركات السيارات',latest:'أحدث العربيات',showAll:'عرض كل الماركات ✖️',showrooms:'المعارض 🏢',packages:'باقات المعارض 💰',listCar:'+ اعرض عربيتك الآن - باقة عربية واحدة',registerShow:'+ سجل معرضك - اختار باقتك',navHome:'الرئيسية',navUsed:'مستعملة',navAdd:'أضف إعلان',navNew:'جديدة',navMore:'المزيد',search:'دور على عربيتك'},
-en:{all:'All',nearNew:'Almost New',used:'Used',new:'New',brandsTitle:'Car Brands',latest:'Latest Cars',showAll:'Show All Brands ✖️',showrooms:'Showrooms 🏢',packages:'Dealer Packages 💰',listCar:'+ List Your Car Now - Single Car Package',registerShow:'+ Register Your Showroom - Choose Package',navHome:'Home',navUsed:'Used',navAdd:'Add Ad',navNew:'New',navMore:'More',search:'Search for your car'}
-};
-function applyLang(){
-try{
-document.documentElement.lang=currentLang;
-document.documentElement.dir=currentLang=='ar'?'rtl':'ltr';
-document.body.dir=currentLang=='ar'?'rtl':'ltr';
-var btn=document.getElementById('langBtn');
-if(btn) btn.innerText=currentLang=='ar'?'EN':'عربي';
-var si=document.getElementById('searchInput');
-if(si) si.placeholder=T[currentLang].search;
-var els=document.querySelectorAll('[data-t]');
-for(var i=0;i<els.length;i++){var k=els[i].getAttribute('data-t');if(T[currentLang][k]) els[i].innerText=T[currentLang][k];}
-localStorage.setItem('motors_lang',currentLang);
-}catch(e){}
-if(typeof renderPkgs==='function') renderPkgs();
-if(typeof renderCars==='function') renderCars('الكل');
-if(typeof renderShows==='function') renderShows();
+function autoPass(){
+  let p='show'+Math.floor(1000+Math.random()*9000);
+  document.getElementById('s_pass').value=p;
+  alert('باسوردك: '+p+' احفظه!');
 }
-function toggleLang(){
-currentLang=currentLang=='ar'?'en':'ar';
-applyLang();
+function autoPin(){
+  let p=''+Math.floor(1000+Math.random()*9000);
+  document.getElementById('s_pin').value=p;
+  alert('رقمك السري: '+p+' احفظه!');
 }
-var COUNTRIES={};
-COUNTRIES["مصر"]={currency:"جنيه",cities:["القاهرة","الجيزة","الزقازيق","الحسينية","المنصورة","الإسكندرية","طنطا","أسيوط","أسوان","بورسعيد"],code:"20"};
-COUNTRIES["السعودية"]={currency:"ريال",cities:["الرياض","جدة","مكة","المدينة","الدمام","أبها","تبوك","حائل"],code:"966"};
-COUNTRIES["الإمارات"]={currency:"درهم",cities:["دبي","أبوظبي","الشارقة","عجمان","رأس الخيمة","الفجيرة"],code:"971"};
-COUNTRIES["الكويت"]={currency:"دينار",cities:["مدينة الكويت","حولي","الفروانية","الأحمدي","الجهراء"],code:"965"};
-COUNTRIES["قطر"]={currency:"ريال",cities:["الدوحة","الريان","الوكرة","الخور"],code:"974"};
-COUNTRIES["الأردن"]={currency:"دينار",cities:["عمان","إربد","الزرقاء","العقبة"],code:"962"};
-COUNTRIES["ليبيا"]={currency:"دينار",cities:["طرابلس","بنغازي","مصراتة","سبها"],code:"218"};
-var MODELS={};
-MODELS['Toyota']=["Corolla","Camry","Land Cruiser","Yaris","Hilux","RAV4"];
-MODELS['Hyundai']=["Tucson","Elantra","Accent","Creta","Sonata","i10"];
-MODELS['Kia']=["Sportage","Cerato","Rio","Sorento","Picanto","Seltos"];
-MODELS['Nissan']=["Sunny","Sentra","Qashqai","Patrol","Juke","X-Trail"];
-MODELS['Mazda']=["Mazda 3","Mazda 6","CX-5","CX-9","Mazda 2"];
-MODELS['Mercedes']=["C180","C200","E200","GLA","GLC","S450"];
-MODELS['BMW']=["320i","520i","X1","X3","X5","M3"];
-MODELS['Renault']=["Duster","Logan","Clio","Megane","Captur"];
-MODELS['Chevrolet']=["Optra","Cruze","Malibu","Captiva","Aveo"];
-MODELS['MG']=["MG5","MG6","MG ZS","MG RX5","MG HS"];
-MODELS['Audi']=["A3","A4","A6","Q3","Q5","Q7"];
-MODELS['Volkswagen']=["Golf","Passat","Tiguan","Polo","T-Roc"];
-MODELS['Ford']=["Focus","Fiesta","Explorer","Mustang","Kuga"];
-MODELS['Peugeot']=["208","2008","3008","508","301"];
-MODELS['Suzuki']=["Swift","Dzire","Vitara","Baleno","Alto"];
-MODELS['BYD']=["F3","Seal","Atto 3","Dolphin","Qin"];
-var currentCountry=localStorage.getItem('motors_country')||"مصر";
-var OWNER_PASS=localStorage.getItem('owner_pass')||"1234";
-var clicks=0;
-var isOwner=sessionStorage.getItem('isOwner')=='1';
-var _set=JSON.parse(localStorage.getItem('motors_settings')||'null');
-var settings=(_set && _set.single && _set.gold && _set.plat)?_set:{single:50,gold:1500,plat:3500};
-var _pay=JSON.parse(localStorage.getItem('motors_pay')||'null');
-var paySettings=(_pay && _pay.voda)?_pay:{name1:"فودافون كاش",voda:"01000000000",name2:"انستا باي",insta:"01000000000",name3:"تحويل بنكي",bank:"رقم الحساب"};
-var currentBrand='';
-var currentModel='';
-var currentKind='الكل';
-function mkCar(nm,pr,ct,cn,yr,kd,sl,slN,wa,img){var o={};o.name=nm;o.price=pr;o.city=ct;o.country=cn;o.year=yr;o.kind=kd;o.seller=sl;o.sellerName=slN;o.wa=wa;o.img=img;return o;}
-function mkShow(nm,ct,cn,ph,cnt,rt,pk,tr){var o={};o.name=nm;o.city=ct;o.country=cn;o.phone=ph;o.count=cnt;o.rate=rt;o.pkg=pk;o.trusted=tr;return o;}
-var defaultCars=[
-mkCar("Toyota Corolla 2023",850000,"القاهرة","مصر",2023,"مستعمل","شخص - فرد","أحمد","01000000000","https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800"),
-mkCar("Hyundai Tucson 2022",1250000,"الجيزة","مصر",2022,"مستعمل","معرض","معرض النور","01000000001","https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"),
-mkCar("Kia Sportage 2021",980000,"الإسكندرية","مصر",2021,"كسر زيرو","شخص - فرد","محمد","01000000000","https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800"),
-mkCar("Toyota Land Cruiser 2022",320000,"الرياض","السعودية",2022,"مستعمل","معرض","معرض الرياض","0500000000","https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"),
-mkCar("Mazda CX-5 2022",1100000,"القاهرة","مصر",2022,"كسر زيرو","شخص - فرد","علي","01000000002","https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"),
-mkCar("Toyota Camry 2023",1500000,"القاهرة","مصر",2023,"زيرو","معرض","معرض النور","01000000001","https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800")
-];
-var defaultShows=[
-mkShow("معرض النور موتورز","القاهرة - مدينة نصر","مصر","01000000001","12 عربية","4.8","بلاتيني",true),
-mkShow("معرض الأصدقاء","الجيزة - فيصل","مصر","01000000002","8 عربيات","4.6","ذهبي",true),
-mkShow("معرض الرياض أوتو","الرياض","السعودية","0500000000","20 عربية","4.9","بلاتيني",true)
-];
-var _sc=JSON.parse(localStorage.getItem('motors_cars')||'null');
-var cars=(_sc && _sc.length>0)?_sc:defaultCars;
-var _ss=JSON.parse(localStorage.getItem('motors_shows')||'null');
-var shows=(_ss && _ss.length>0)?_ss:defaultShows;
-var pending=JSON.parse(localStorage.getItem('motors_pending')||'[]');
-var pendingCars=JSON.parse(localStorage.getItem('motors_pending_cars')||'[]');
-var notifs=JSON.parse(localStorage.getItem('motors_notifs')||'[]');
-var tempPay=null;
-function getCurr(){return COUNTRIES[currentCountry].currency}
-function save(){localStorage.setItem('motors_cars',JSON.stringify(cars));localStorage.setItem('motors_shows',JSON.stringify(shows));localStorage.setItem('motors_pending',JSON.stringify(pending));localStorage.setItem('motors_pending_cars',JSON.stringify(pendingCars));localStorage.setItem('motors_settings',JSON.stringify(settings));localStorage.setItem('motors_pay',JSON.stringify(paySettings));localStorage.setItem('owner_pass',OWNER_PASS);localStorage.setItem('motors_notifs',JSON.stringify(notifs));localStorage.setItem('motors_country',currentCountry)}
-function changeCountry(c){currentCountry=c;currentBrand='';currentModel='';currentKind='الكل';document.getElementById('modelsBar').style.display='none';save();applyCountryUI();renderCars('الكل');renderShows();renderPkgs()}
-function applyCountryUI(){document.getElementById('countrySel').value=currentCountry;document.getElementById('logoCountry').innerText=currentCountry=='مصر'?'Egypt':currentCountry;document.getElementById('carsCountryLabel').innerText=currentCountry;document.getElementById('showsCountryLabel').innerText=currentCountry;document.getElementById('pkgsCountryLabel').innerText=currentCountry}
-function updateCityList(){var cc=document.getElementById('carCountry').value;var sel=document.getElementById('c');sel.innerHTML='';var list=COUNTRIES[cc].cities;for(var i=0;i<list.length;i++){var o=document.createElement('option');o.text=list[i];sel.add(o)}document.getElementById('currencyLabel').innerText=COUNTRIES[cc].currency;document.getElementById('addCarCountry').innerText=cc;document.getElementById('addCarCountry2').innerText=cc}
-function updateShowCityList(){var cc=document.getElementById('showCountry').value;var sel=document.getElementById('showCityIn');sel.innerHTML='';var list=COUNTRIES[cc].cities;for(var i=0;i<list.length;i++){var o=document.createElement('option');o.text=list[i];sel.add(o)}document.getElementById('addShowCountry').innerText=cc}
-function fillCountrySelects(){var cc=document.getElementById('carCountry');var sc=document.getElementById('showCountry');cc.innerHTML='';sc.innerHTML='';var keys=Object.keys(COUNTRIES);for(var i=0;i<keys.length;i++){var k=keys[i];var o1=document.createElement('option');o1.value=k;o1.text=k;cc.add(o1);var o2=document.createElement('option');o2.value=k;o2.text=k;sc.add(o2)}cc.value=currentCountry;sc.value=currentCountry}
-function updateModelList(){var b=document.getElementById('b').value;var sel=document.getElementById('m');sel.innerHTML='';var list=MODELS[b]||["Corolla"];for(var i=0;i<list.length;i++){var o=document.createElement('option');o.text=list[i];o.value=list[i];sel.add(o)}}
-function updateOwnerUI(){var bell=document.getElementById('bellWrap');var hint=document.getElementById('ownerHint');var unread=0;for(var i=0;i<notifs.length;i++){if(!notifs[i].read) unread++}if(isOwner){bell.classList.add('show');hint.classList.add('show');var b=document.getElementById('bellBadge');if(unread>0){b.style.display='flex';b.innerText=unread}else{b.style.display='none'}}else{bell.classList.remove('show');hint.classList.remove('show')}}
-function renderPkgs(){var box=document.getElementById('pkgsBox');if(!box) return;var isEn=currentLang=='en';var html='';if(isEn){html+='<div class="pkg" onclick="selectPkg(this,\'عربية واحدة\')"><h3>🚗 Single Car - For Individuals</h3><div class="pr">'+settings.single+' '+getCurr()+'</div><p>One car only - in '+currentCountry+'</p></div>';html+='<div class="pkg" onclick="selectPkg(this,\'ذهبي\')"><h3>⭐ Gold - For Showrooms</h3><div class="pr">'+settings.gold+' '+getCurr()+' / month</div><p>20 cars - in '+currentCountry+'</p></div>';html+='<div class="pkg" onclick="selectPkg(this,\'بلاتيني\')"><h3>💎 Platinum - For Showrooms</h3><div class="pr">'+settings.plat+' '+getCurr()+' / month</div><p>Unlimited cars - in '+currentCountry+'</p></div>';html+='<p style="text-align:center;color:#777;font-size:12px">Launch Offer - First 10 showrooms locked price</p>';}else{html+='<div class="pkg" onclick="selectPkg(this,\'عربية واحدة\')"><h3>🚗 عربية واحدة - للفرد</h3><div class="pr">'+settings.single+' '+getCurr()+'</div><p>عربية واحدة بس - في '+currentCountry+'</p></div>';html+='<div class="pkg" onclick="selectPkg(this,\'ذهبي\')"><h3>⭐ ذهبي - للمعرض</h3><div class="pr">'+settings.gold+' '+getCurr()+' / شهر</div><p>20 عربية - في '+currentCountry+'</p></div>';html+='<div class="pkg" onclick="selectPkg(this,\'بلاتيني\')"><h3>💎 بلاتيني - للمعرض</h3><div class="pr">'+settings.plat+' '+getCurr()+' / شهر</div><p>عربيات بلا حدود - في '+currentCountry+'</p></div>';html+='<p style="text-align:center;color:#777;font-size:12px">عرض الافتتاح - أول 10 معارض سعرهم مقفول</p>';}box.innerHTML=html;var sel=document.getElementById('showPkg');if(sel){sel.innerHTML='<option>عربية واحدة - '+settings.single+' '+getCurr()+'</option><option>ذهبي - '+settings.gold+' '+getCurr()+'</option><option>بلاتيني - '+settings.plat+' '+getCurr()+'</option>';}var lab=document.getElementById('singlePriceLabel');if(lab){lab.innerText=settings.single+' '+getCurr();}}
-function badgeFor(s){if(s.pkg=='بلاتيني'){return '<span class="badge badgePlat">💎 بلاتيني • '+(s.trusted?'✅ موثق':'غير موثق')+'</span>';}if(s.pkg=='ذهبي'){return '<span class="badge badgeGold">⭐ ذهبي • '+(s.trusted?'✅ موثق':'غير موثق')+'</span>';}return '<span class="badge badgeSingle">🚗 عربية واحدة • '+(s.trusted?'✅ موثق':'بانتظار الدفع')+'</span>';}
-function clsFor(s){if(s.pkg=='بلاتيني') return 'showCard plat';if(s.pkg=='ذهبي') return 'showCard gold';return 'showCard';}
-function renderCarList(list){var grid=document.getElementById('carsGrid');grid.innerHTML='';if(list.length==0){var msg=currentLang=='en'?'🚗 New cars coming soon - List your car and be first':'🚗 عربيات جديدة بتنزل كل يوم - سجل عربيتك وكن أول واحد';if(currentBrand){msg=currentLang=='en'?'🚗 '+currentBrand+' '+(currentModel||'')+' cars coming soon':'🚗 عربيات '+currentBrand+' '+(currentModel||'')+' بتنزل قريب - سجل عربيتك وكن أول واحد';}grid.innerHTML='<p style="grid-column:1/3;text-align:center;color:#777;padding:20px">'+msg+'</p>';return;}for(var j=0;j<list.length;j++){var cc=list[j];var d=document.createElement('div');d.className='card';var waLink='https://wa.me/'+COUNTRIES[cc.country].code+cc.wa.replace(/^0/,'');d.innerHTML='<img src="'+cc.img+'"><div class="cb"><h3>'+cc.name+'</h3><div class="price">'+COUNTRIES[cc.country].currency+' '+cc.price.toLocaleString()+'</div><div class="meta">📍 '+cc.city+' • '+cc.year+' • '+cc.kind+'</div><span class="badge">'+(cc.seller=='معرض'?'🏢 '+cc.sellerName:'👤 '+cc.sellerName)+'</span><a class="wa" href="'+waLink+'">WhatsApp</a></div>';grid.appendChild(d);}}
-function getFilteredCars(){var list=[];for(var i=0;i<cars.length;i++){var c=cars[i];if(c.country!=currentCountry) continue;if(currentKind!='الكل' && c.kind!=currentKind) continue;if(currentBrand && c.name.toLowerCase().indexOf(currentBrand.toLowerCase())==-1) continue;if(currentModel && c.name.toLowerCase().indexOf(currentModel.toLowerCase())==-1) continue;list.push(c);}return list;}
-function renderCars(filter){if(filter){currentKind=filter;}renderCarList(getFilteredCars());}
-function renderShows(){var box=document.getElementById('showsList');box.innerHTML='';var filtered=[];for(var i=0;i<shows.length;i++){if(shows[i].country==currentCountry){filtered.push(shows[i]);}}if(filtered.length==0){box.innerHTML='<p style="text-align:center;color:#777;padding:10px 16px">'+(currentLang=='en'?'🏢 New showrooms joining every day - Register yours now in '+currentCountry:'🏢 معارض جديدة بتنضم كل يوم - سجل معرضك دلوقتي في '+currentCountry)+'</p>';return;}var sorted=filtered.slice();sorted.sort(function(a,b){var v={};v['بلاتيني']=3;v['ذهبي']=2;v['عربية واحدة']=1;return (v[b.pkg]||1)-(v[a.pkg]||1);});for(var j=0;j<sorted.length;j++){var s=sorted[j];var idx=shows.indexOf(s);var d=document.createElement('div');d.className=clsFor(s);d.setAttribute('data-idx',idx);d.onclick=function(){openShow(parseInt(this.getAttribute('data-idx')))};d.innerHTML='<div class="ico">🏢</div><div style="flex:1"><b>'+s.name+'</b><span>📍 '+s.city+' • '+s.count+'</span><br>'+badgeFor(s)+'</div><div>›</div>';box.appendChild(d);}}
-function openShow(i){var s=shows[i];document.getElementById('showName').innerHTML=s.name+' <span style="float:left;cursor:pointer" onclick="closeShow()">❌</span>';document.getElementById('showInfo').innerText='📍 '+s.city+' • '+s.country+' • ⭐ '+s.rate+' • باقة '+s.pkg;var names=[];for(var k=0;k<cars.length;k++){if(cars[k].sellerName==s.name && cars[k].country==s.country){names.push(cars[k].name);}}document.getElementById('showCars').innerHTML='عربيات: '+(names.join(', ')||'عربيات المعرض هتنزل قريب');document.getElementById('showWa').href='https://wa.me/'+COUNTRIES[s.country].code+s.phone.replace(/^0/,'');document.getElementById('showModal').classList.add('open');}
-function closeShow(){document.getElementById('showModal').classList.remove('open');}
-function selectPkg(el,p){var all=document.querySelectorAll('.pkg');for(var i=0;i<all.length;i++){all[i].classList.remove('sel');}el.classList.add('sel');var sel=document.getElementById('showPkg');if(p=='عربية واحدة'){sel.value='عربية واحدة - '+settings.single+' '+getCurr();}if(p=='ذهبي'){sel.value='ذهبي - '+settings.gold+' '+getCurr();}if(p=='بلاتيني'){sel.value='بلاتيني - '+settings.plat+' '+getCurr();}om2();}
-function filterBrand(b){currentBrand=b;currentModel='';currentKind='الكل';var bar=document.getElementById('modelsBar');bar.style.display='block';var html='';html+='<button class="modelBtn on" onclick="showBrandAll()">'+(currentLang=='en'?'All ':'كل ')+b+' ✅</button>';var mods=MODELS[b]||[];for(var i=0;i<mods.length;i++){html+='<button class="modelBtn" onclick="filterModel(\''+mods[i]+'\')">'+mods[i]+'</button>';}bar.innerHTML=html;document.getElementById('carsCountryLabel').innerText=currentCountry+' - '+b;renderCarList(getFilteredCars());window.scrollTo({top:document.getElementById('carsGrid').offsetTop-100,behavior:'smooth'});}
-function showBrandAll(){currentModel='';var btns=document.querySelectorAll('#modelsBar .modelBtn');for(var i=0;i<btns.length;i++){btns[i].classList.remove('on');}if(btns[0]) btns[0].classList.add('on');document.getElementById('carsCountryLabel').innerText=currentCountry+' - '+currentBrand;renderCarList(getFilteredCars());}
-function filterModel(m){currentModel=m;var btns=document.querySelectorAll('#modelsBar .modelBtn');for(var i=0;i<btns.length;i++){if(btns[i].innerText==m){btns[i].classList.add('on');}else{btns[i].classList.remove('on');}}document.getElementById('carsCountryLabel').innerText=currentCountry+' - '+currentBrand+' - '+m;renderCarList(getFilteredCars());window.scrollTo({top:document.getElementById('carsGrid').offsetTop-100,behavior:'smooth'});}
-function ownerLogin(){clicks++;if(clicks>=3){clicks=0;var p=prompt('اكتب كلمة السر:');if(p==OWNER_PASS){isOwner=true;sessionStorage.setItem('isOwner','1');updateOwnerUI();openOwner();}else{alert('كلمة السر غلط');}}setTimeout(function(){clicks=0;},2000);}
-function ownerLogout(){isOwner=false;sessionStorage.removeItem('isOwner');updateOwnerUI();}
-function openNotif(){if(!isOwner) return;var list=document.getElementById('notifList');list.innerHTML=notifs.length==0?'مفيش إشعارات':'';for(var i=0;i<notifs.length;i++){var n=notifs[i];var d=document.createElement('div');d.className='notifItem';d.style.background=n.read?'#fff':'#FFF8E1';d.innerHTML='<b>'+n.title+'</b><br>'+n.text+'<br><small style="color:#999">'+n.time+'</small>';list.appendChild(d);}for(var j=0;j<notifs.length;j++){notifs[j].read=true;}save();updateOwnerUI();document.getElementById('notifModal').classList.add('open');}
-function closeNotif(){document.getElementById('notifModal').classList.remove('open');}
-function openOwner(){document.getElementById('singlePriceIn').value=settings.single;document.getElementById('goldPriceIn').value=settings.gold;document.getElementById('platPriceIn').value=settings.plat;document.getElementById('payNameIn1').value=paySettings.name1;document.getElementById('vodaIn').value=paySettings.voda;document.getElementById('payNameIn2').value=paySettings.name2;document.getElementById('instaIn').value=paySettings.insta;document.getElementById('payNameIn3').value=paySettings.name3;document.getElementById('bankIn').value=paySettings.bank;renderOwner();document.getElementById('ownerModal').classList.add('open');}
-function closeOwner(){document.getElementById('ownerModal').classList.remove('open');}
-function saveSettings(){var sg=parseInt(document.getElementById('singlePriceIn').value||50);var g=parseInt(document.getElementById('goldPriceIn').value||1500);var pl=parseInt(document.getElementById('platPriceIn').value||3500);var np=document.getElementById('newPassIn').value;settings.single=sg;settings.gold=g;settings.plat=pl;if(np){OWNER_PASS=np;}save();renderPkgs();alert('تم الحفظ ✅');}
-function savePaySettings(){var a=document.getElementById('payNameIn1').value;if(a){paySettings.name1=a;}var b=document.getElementById('vodaIn').value;if(b){paySettings.voda=b;}var c=document.getElementById('payNameIn2').value;if(c){paySettings.name2=c;}var d=document.getElementById('instaIn').value;if(d){paySettings.insta=d;}var e=document.getElementById('payNameIn3').value;if(e){paySettings.name3=e;}var f=document.getElementById('bankIn').value;if(f){paySettings.bank=f;}save();alert('تم حفظ طرق الدفع ✅');}
-function copyPay(n){var txt='';if(n==1){txt=paySettings.voda;}if(n==2){txt=paySettings.insta;}if(n==3){txt=paySettings.bank;}navigator.clipboard.writeText(txt).then(function(){alert('تم النسخ ✅ '+txt);});}
-function openPay(payTitleText,amount,country){document.getElementById('payTitle').innerText=payTitleText+' - المبلغ: '+amount+' '+COUNTRIES[country].currency+' - '+country;document.getElementById('payName1').innerText=paySettings.name1;document.getElementById('payVodaNum').innerText=paySettings.voda;document.getElementById('payName2').innerText=paySettings.name2;document.getElementById('payInstaNum').innerText=paySettings.insta;document.getElementById('payName3').innerText=paySettings.name3;document.getElementById('payBankNum').innerText=paySettings.bank;var sel=document.getElementById('payMethod');sel.innerHTML='<option>'+paySettings.name1+'</option><option>'+paySettings.name2+'</option><option>'+paySettings.name3+'</option>';document.getElementById('payModal').classList.add('open');}
-function closePay(){document.getElementById('payModal').classList.remove('open');}
-function confirmPay(){var method=document.getElementById('payMethod').value;var ref=document.getElementById('payRef').value||'بدون رقم';if(!tempPay){alert('في مشكلة، حاول تاني');return;}if(tempPay.type=='car'){var carData=tempPay.data;carData.payMethod=method;carData.payRef=ref;pendingCars.unshift(carData);var n1={};n1.title="دفع جديد - عربية واحدة - "+carData.country;n1.text="عربية: "+carData.name+" - دفع بـ "+method+" - رقم العملية: "+ref+" - صاحبها: "+carData.sellerName;n1.time=new Date().toLocaleString('ar-EG');n1.read=false;notifs.unshift(n1);}else{var showData=tempPay.data;showData.payMethod=method;showData.payRef=ref;pending.unshift(showData);var n2={};n2.title="دفع جديد - معرض - "+showData.country;n2.text="المعرض: "+showData.name+" - باقة: "+showData.pkg+" - دفع بـ "+method+" - رقم العملية: "+ref;n2.time=new Date().toLocaleString('ar-EG');n2.read=false;notifs.unshift(n2);}save();updateOwnerUI();closePay();document.getElementById('payRef').value='';tempPay=null;alert('تم ارسال طلبك بنجاح ✅ هيتم مراجعة الدفع وتفعيلك - رقم العملية: '+ref);}
-function renderOwner(){var pc=document.getElementById('pendingCarsList');if(pendingCars.length==0){pc.innerHTML='مفيش طلبات ✅';}else{pc.innerHTML='';for(var i=0;i<pendingCars.length;i++){var c=pendingCars[i];var d=document.createElement('div');d.className='pending';d.innerHTML='<b>'+c.name+'</b> - '+c.price.toLocaleString()+' '+COUNTRIES[c.country].currency+'<br>👤 '+c.sellerName+' - 📍 '+c.city+' - '+c.country+' - 📱 '+c.wa+'<br>💳 دفع بـ: '+(c.payMethod||'-')+' - رقم العملية: '+(c.payRef||'-')+'<br><button onclick="approveCar('+i+')">✅ تأكد الدفع ونشر</button><button onclick="rejectCar('+i+')" style="background:#E53935 !important">❌ رفض</button>';pc.appendChild(d);}}var pl=document.getElementById('pendingList');if(pending.length==0){pl.innerHTML='مفيش طلبات ✅';}else{pl.innerHTML='';for(var j=0;j<pending.length;j++){var s=pending[j];var dd=document.createElement('div');dd.className='pending';dd.innerHTML='<b>'+s.name+'</b><br>📍 '+s.city+' - '+s.country+' • 📱 '+s.phone+'<br>باقة: '+s.pkg+'<br>💳 دفع بـ: '+(s.payMethod||'-')+' - رقم العملية: '+(s.payRef||'-')+'<br><button onclick="approveShow('+j+')">✅ تأكد الدفع وتفعيل</button><button onclick="rejectShow('+j+')" style="background:#E53935 !important">❌ رفض</button>';pl.appendChild(dd);}}var al=document.getElementById('approvedList');al.innerHTML='';for(var k=0;k<shows.length;k++){var ss=shows[k];var ddd=document.createElement('div');ddd.className='pending';ddd.style.background='#E8F5E9';ddd.innerHTML='<b>'+ss.name+'</b> - '+ss.city+' - '+ss.country+' - '+ss.pkg+'<br><button onclick="toggleTrust('+k+')">🔁 توثيق / إلغاء</button><button onclick="removeShow('+k+')" style="background:#E53935 !important">حذف</button>';al.appendChild(ddd);}}
-function approveShow(i){var s=pending[i];s.trusted=false;s.count='0 عربية';s.rate='5.0';shows.unshift(s);pending.splice(i,1);save();renderShows();renderOwner();alert('تم التفعيل ✅ بعد تأكيد الدفع');}
-function rejectShow(i){pending.splice(i,1);save();renderOwner();}
-function approveCar(i){var c=pendingCars[i];cars.unshift(c);pendingCars.splice(i,1);save();renderCars('الكل');renderOwner();alert('تم نشر العربية ✅ بعد تأكيد الدفع');}
-function rejectCar(i){pendingCars.splice(i,1);save();renderOwner();}
-function toggleTrust(i){shows[i].trusted=!shows[i].trusted;save();renderShows();renderOwner();}
-function removeShow(i){if(confirm('متأكد؟')){shows.splice(i,1);save();renderShows();renderOwner();}}
-function setActiveNav(id){var all=document.querySelectorAll('nav a');for(var i=0;i<all.length;i++){all[i].classList.remove('active');}if(id){document.getElementById(id).classList.add('active');}}
-function filterCards(kind){currentKind=kind;renderCarList(getFilteredCars());}
-function pill(el,kind){var all=document.querySelectorAll('.pills button');for(var i=0;i<all.length;i++){all[i].classList.remove('on');}el.classList.add('on');filterCards(kind);}
-function goHome(){closeMore();currentBrand='';currentModel='';currentKind='الكل';document.getElementById('modelsBar').style.display='none';applyCountryUI();renderCars('الكل');setActiveNav('navHome');window.scrollTo({top:0,behavior:'smooth'});}
-function filterNav(kind){closeMore();filterCards(kind);if(kind=='مستعمل'){setActiveNav('navUsed');}if(kind=='زيرو'){setActiveNav('navNew');}}
-function toggleMore(){var m=document.getElementById('moreBox');if(m.style.display=='block'){m.style.display='none';}else{m.style.display='block';}}
-function closeMore(){document.getElementById('moreBox').style.display='none';}
-function doSearch(){var q=document.getElementById('searchInput').value.toLowerCase();var cards=document.querySelectorAll('#carsGrid .card');for(var i=0;i<cards.length;i++){var c=cards[i];if(c.innerText.toLowerCase().indexOf(q)>-1){c.style.display='block';}else{c.style.display='none';}}}
-function om(){closeMore();fillCountrySelects();updateCityList();updateModelList();document.getElementById('modal').classList.add('open');}
-function cm(){document.getElementById('modal').classList.remove('open');}
-function om2(){fillCountrySelects();updateShowCityList();document.getElementById('modal2').classList.add('open');}
-function cm2(){document.getElementById('modal2').classList.remove('open');}
-function add(){var cc=document.getElementById('carCountry').value;var brand=document.getElementById('b').value;var model=document.getElementById('m').value||'';var year=document.getElementById('y').value||2024;var price=parseInt(document.getElementById('p').value||0);var city=document.getElementById('c').value;var kind=document.getElementById('k').value;var wa=document.getElementById('w').value||'01000000000';var seller=document.getElementById('sellerType').value;var sellerName=document.getElementById('sellerName').value||'بائع';if(!model){alert('اكتب الموديل');return;}var newCar={};newCar.name=brand+' '+model+' '+year;newCar.price=price;newCar.city=city;newCar.country=cc;newCar.year=year;newCar.kind=kind;newCar.seller=seller;newCar.sellerName=sellerName;newCar.wa=wa;newCar.img="https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800";cm();tempPay={};tempPay.type='car';tempPay.data=newCar;tempPay.amount=settings.single;openPay('عربية واحدة - '+newCar.name,settings.single,cc);}
-function addShowroom(){var cc=document.getElementById('showCountry').value;var n=document.getElementById('showNameIn').value;var ci=document.getElementById('showCityIn').value;var ph=document.getElementById('showPhoneIn').value;var pkg=document.getElementById('showPkg').value.split(' - ')[0];if(!n){alert('اكتب اسم المعرض');return;}var amt=settings.single;if(pkg=='ذهبي'){amt=settings.gold;}if(pkg=='بلاتيني'){amt=settings.plat;}cm2();var newShow={};newShow.name=n;newShow.city=ci;newShow.country=cc;newShow.phone=ph;newShow.count='0 عربية';newShow.rate='5.0';newShow.pkg=pkg;newShow.trusted=false;tempPay={};tempPay.type='show';tempPay.data=newShow;tempPay.amount=amt;openPay(pkg+' - معرض '+n,amt,cc);}
-// ربط زرار اللغة بعد تحميل كل حاجة - ده اللي كان ناقص
-document.getElementById('langBtn').addEventListener('click', function(){ toggleLang(); });
-applyCountryUI();applyLang();updateOwnerUI();fillCountrySelects();updateCityList();updateShowCityList();updateModelList();
+
+// تسجيل معرض في Firebase
+async function registerShowroom(){
+  let data={
+    name: document.getElementById('s_name').value,
+    city: document.getElementById('s_city').value,
+    phone: document.getElementById('s_phone').value,
+    pass: document.getElementById('s_pass').value,
+    pin: document.getElementById('s_pin').value,
+    payType: document.getElementById('s_payType').value,
+    wallet: document.getElementById('s_wallet').value,
+    bankName: document.getElementById('s_bankName').value,
+    pkg: document.getElementById('s_pkg').value,
+    status: 'pending',
+    createdAt: Date.now()
+  };
+  if(!data.name || !data.phone){ alert('اكتب اسم المعرض ورقم الواتساب'); return; }
+  if(!data.pass){ alert('اختار الباسورد او دوس ولدلي اتوماتيك'); return; }
+  if(!data.pin || data.pin.length!=4){ alert('اختار رقم سري 4 ارقام'); return; }
+  if(!data.wallet){ alert('اكتب رقم المحفظة اللي الناس هتحولك عليه'); return; }
+
+  // هنا بيبعت لـ Firebase - نفس الكولكشن اللي عندك
+  await db.collection('showrooms_pending').add(data);
+  alert('تم ارسال طلبك ✅\nباسوردك: '+data.pass+'\nرقمك السري: '+data.pin+'\nاحفظهم! المالك هيوافق عليك وتقدر تضيف عربياتك');
+}
+
+// المعرض يضيف عربيته
+async function addShowCar(){
+  let car={
+    title: document.getElementById('c_title').value,
+    price: parseInt(document.getElementById('c_price').value),
+    img: document.getElementById('c_img').value,
+    year: document.getElementById('c_year').value,
+    showroomPhone: currentShowroom.phone,
+    showroomName: currentShowroom.name,
+    status: 'active',
+    createdAt: Date.now()
+  };
+  await db.collection('cars').add(car);
+  alert('تم نشر العربية في صفحتك ✅');
+}
+
+// المشتري يدوس اشتري - يطلعله دفع المعرض
+function openBuy(car, showroom){
+  document.getElementById('buyBox').style.display='block';
+  document.getElementById('buyTitle').innerText='💳 ادفع ثمن '+car.title+' - '+car.price.toLocaleString()+' جنيه';
+  document.getElementById('buyInfo').innerText='المعرض: '+showroom.name+' - '+showroom.city;
+  document.getElementById('buyPayInfo').innerHTML=
+    'حول على: <b>'+showroom.payType+'</b><br>'+
+    'رقم المحفظة / الحساب: <b style="font-size:18px">'+showroom.wallet+'</b><br>'+
+    'الاسم: '+showroom.bankName+'<br>'+
+    'المبلغ: <b>'+car.price.toLocaleString()+' جنيه</b>';
+  window.currentBuy={car, showroom};
+  document.getElementById('buyBox').scrollIntoView({behavior:'smooth'});
+}
+
+async function confirmPay(){
+  let ref=document.getElementById('payRef').value;
+  if(!ref){ alert('اكتب رقم العملية'); return; }
+  await db.collection('payments').add({
+    car: window.currentBuy.car.title,
+    price: window.currentBuy.car.price,
+    showroom: window.currentBuy.showroom.name,
+    showroomPhone: window.currentBuy.showroom.phone,
+    ref: ref,
+    status: 'waiting_confirm',
+    createdAt: Date.now()
+  });
+  alert('تم ارسال تأكيد الدفع للمعرض ✅ المعرض هيأكد ان الفلوس وصلت ويتواصل معاك');
+}
 </script>
-  <!-- Firebase - Motors Egypt / arbyitk -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-<script>
-var firebaseConfig = {
-  apiKey: "AIzaSyBo4pNxo1E9MFnbMhBZqFFkLkR-GlFcF1I",
-  authDomain: "arbyitk.firebaseapp.com",
-  projectId: "arbyitk",
-  storageBucket: "arbyitk.firebasestorage.app",
-  messagingSenderId: "998421358989",
-  appId: "1:998421358989:web:996cf9cbf630c03906f5c4",
-  measurementId: "G-EM8XZ2MV6Q"
-};
-try{ firebase.initializeApp(firebaseConfig); var db = firebase.firestore(); }catch(e){}
-var oldConfirmPay = confirmPay;
-confirmPay = function(){
-  var method = document.getElementById('payMethod').value;
-  var ref = document.getElementById('payRef').value || 'بدون رقم';
-  if(tempPay){ try{ db.collection("requests").add({type: tempPay.type, data: tempPay.data, payMethod: method, payRef: ref, country: tempPay.data.country || "", time: new Date().toISOString(), status: "pending"}); }catch(e){} }
-  oldConfirmPay();
-};
-var oldRenderOwner = renderOwner;
-renderOwner = function(){
-  oldRenderOwner();
-  try{
-    db.collection("requests").orderBy("time","desc").limit(20).get().then(function(snap){
-      var html = '<div style="background:#E8F5E9;padding:10px;border-radius:10px;margin:10px 0"><b>🔥 طلبات من Firebase</b><br>';
-      if(snap.empty){ html += 'لسه مفيش طلبات'; }
-      snap.forEach(function(doc){ var d = doc.data(); var dd = d.data || {}; html += '<div style="background:#fff;padding:10px;border-radius:10px;margin:8px 0;border:1px solid #ddd"><b>'+(dd.name||'')+'</b> - '+(d.type||'')+'<br>📍 '+(dd.city||'')+' - '+(dd.country||'')+'<br>📱 '+(dd.wa||dd.phone||'')+'<br>💳 '+(d.payMethod||'')+' - رقم: '+(d.payRef||'')+'</div>'; });
-      html += '</div>';
-      var box = document.getElementById('pendingCarsList');
-      if(box) box.innerHTML = html + box.innerHTML;
-    });
-  }catch(e){}
-};
-</script>
-</body>
-</html>
