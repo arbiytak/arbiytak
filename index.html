@@ -1,133 +1,72 @@
-<!-- ===== تسجيل معرض اتوماتيك ===== -->
-<div id="showReg" style="background:#fff;padding:16px;border-radius:16px;margin:16px">
-<h3>🏢 سجل معرضك لنفسك</h3>
-<input id="s_name" placeholder="اسم المعرض" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<input id="s_city" placeholder="المدينة - مثال: القاهرة" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<input id="s_phone" placeholder="رقم الواتساب 01xxxxxxxxx" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>arbiytak - سجل معرضك</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f5f5f5;margin:0;padding:15px}
+.box{background:#fff;max-width:480px;margin:auto;padding:20px;border-radius:15px;box-shadow:0 2px 10px rgba(0,0,0,.1)}
+h2{text-align:center;margin:0 0 15px}
+label{display:block;margin:12px 0 5px;font-weight:bold}
+input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:16px;box-sizing:border-box}
+button{width:100%;padding:12px;margin-top:8px;border:none;border-radius:10px;font-size:16px;cursor:pointer}
+.btn-black{background:#111;color:#fff}
+.btn-green{background:#16a34a;color:#fff;font-weight:bold;margin-top:15px}
+.note{font-size:13px;color:#666;text-align:center;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>🏪 سجل معرضك لنفسك</h2>
+
+<label>اسم المعرض</label>
+<input id="s_name" placeholder="مثال: معرض النور للسيارات">
+
+<label>المدينة - مكان المعرض</label>
+<input id="s_city" placeholder="مثال: دمنهور - البحيرة">
+
+<label>رقم التواصل - واتساب</label>
+<input id="s_phone" placeholder="01xxxxxxxxx">
+
+<label>رابط اللوكيشن - Google Maps</label>
+<input id="s_location" placeholder="الصق هنا رابط لوكيشن المعرض">
 
 <label>🔐 اختار الباسورد بتاعك</label>
-<input id="s_pass" placeholder="مثال: nour123" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<button onclick="autoPass()" style="width:100%;background:#111;color:#fff;padding:10px;border-radius:12px">🎲 ولدلي باسورد اتوماتيك</button>
+<input id="s_pass" type="text" placeholder="مثال: most123">
+<button class="btn-black" onclick="genPass()">🎲 ولدلي باسورد اتوماتيك</button>
 
 <label>🔑 الرقم السري - 4 ارقام</label>
-<input id="s_pin" placeholder="مثال: 4582" maxlength="4" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<button onclick="autoPin()" style="width:100%;background:#111;color:#fff;padding:10px;border-radius:12px">🎲 ولدلي رقم سري اتوماتيك</button>
-
-</select>
-<input id="s_wallet" placeholder="رقم المحفظة / رقم الحساب - اللي هيتحول عليه الملايين" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<input id="s_bankName" placeholder="اسم المحفظة / اسم البنك - اختياري" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
+<input id="s_pin" type="text" maxlength="4" placeholder="مثال: 4589">
+<button class="btn-black" onclick="genPin()">🎲 ولدلي رقم سري اتوماتيك</button>
 
 <label>📦 اختار باقتك</label>
-<select id="s_pkg" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<option>شهري - 500ج</option>
-<option>3 شهور - 1200ج</option>
-<option>سنة - 4000ج</option>
+<select id="s_plan">
+<option value="500">شهري - 500ج</option>
+<option value="1200">3 شهور - 1200ج</option>
+<option value="4000">سنوي - 4000ج</option>
 </select>
 
-<button onclick="registerShowroom()" style="width:100%;background:#00AA06;color:#fff;padding:14px;border-radius:12px;font-weight:900">سجل معرضي ✅</button>
-<p style="font-size:12px;color:#777;text-align:center;margin-top:8px">معرضك مش هيظهر غير لما المالك يوافق عليه</p>
-</div>
-
-<!-- ===== المعرض يضيف عربيته بنفسه ===== -->
-<div id="showAddCar" style="display:none;background:#FFF8E1;padding:16px;border-radius:16px;margin:16px">
-<h3>➕ ضيف عربية لمعرضك</h3>
-<input id="c_title" placeholder="اسم العربية - مثال: تويوتا كورولا 2023" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<input id="c_price" type="number" placeholder="السعر - مثال: 1200000" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<input id="c_img" placeholder="لينك صورة العربية" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<input id="c_year" placeholder="السنة" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<button onclick="addShowCar()" style="width:100%;background:#00AA06;color:#fff;padding:14px;border-radius:12px;font-weight:900">انشر العربية في صفحتي ✅</button>
-</div>
-
-<!-- ===== المشتري يدفع ثمن العربية للمعرض ===== -->
-<div id="buyBox" style="display:none;background:#E8F5E9;padding:16px;border-radius:16px;margin:16px">
-<h3 id="buyTitle">💳 ادفع ثمن العربية</h3>
-<p id="buyInfo" style="font-size:14px;margin:8px 0"></p>
-<div id="buyPayInfo" style="background:#fff;padding:12px;border-radius:12px;font-size:14px"></div>
-<label>رقم العملية بعد التحويل</label>
-<input id="payRef" placeholder="اكتب رقم العملية اللي طلعلك بعد التحويل" style="width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:12px">
-<button onclick="confirmPay()" style="width:100%;background:#111;color:#fff;padding:14px;border-radius:12px;font-weight:900">بعت الفلوس ✅ ابعت تأكيد للمعرض</button>
-<p style="font-size:11px;color:#777;text-align:center">⚠️ اتأكد انك بتحول على رقم المعرض الرسمي اللي ظاهر فوق، مش أي رقم تاني</p>
+<button class="btn-green" onclick="register()">✅ سجل معرضي</button>
+<p class="note">اشتراك بس - مفيش عمولة - المشتري هيكلمك على رقمك وهيجيلك على اللوكيشن</p>
 </div>
 
 <script>
-function autoPass(){
-  let p='show'+Math.floor(1000+Math.random()*9000);
+function genPass(){
+  let chars="abcdefghijklmnopqrstuvwxyz1234567890";
+  let p="";
+  for(let i=0;i<6;i++){ p+=chars[Math.floor(Math.random()*chars.length)]; }
   document.getElementById('s_pass').value=p;
-  alert('باسوردك: '+p+' احفظه!');
 }
-function autoPin(){
-  let p=''+Math.floor(1000+Math.random()*9000);
-  document.getElementById('s_pin').value=p;
-  alert('رقمك السري: '+p+' احفظه!');
+function genPin(){
+  document.getElementById('s_pin').value=Math.floor(1000+Math.random()*9000);
 }
-
-// تسجيل معرض في Firebase
-async function registerShowroom(){
-  let data={
-    name: document.getElementById('s_name').value,
-    city: document.getElementById('s_city').value,
-    phone: document.getElementById('s_phone').value,
-    pass: document.getElementById('s_pass').value,
-    pin: document.getElementById('s_pin').value,
-    payType: document.getElementById('s_payType').value,
-    wallet: document.getElementById('s_wallet').value,
-    bankName: document.getElementById('s_bankName').value,
-    pkg: document.getElementById('s_pkg').value,
-    status: 'pending',
-    createdAt: Date.now()
-  };
-  if(!data.name || !data.phone){ alert('اكتب اسم المعرض ورقم الواتساب'); return; }
-  if(!data.pass){ alert('اختار الباسورد او دوس ولدلي اتوماتيك'); return; }
-  if(!data.pin || data.pin.length!=4){ alert('اختار رقم سري 4 ارقام'); return; }
-  if(!data.wallet){ alert('اكتب رقم المحفظة اللي الناس هتحولك عليه'); return; }
-
-  // هنا بيبعت لـ Firebase - نفس الكولكشن اللي عندك
-  await db.collection('showrooms_pending').add(data);
-  alert('تم ارسال طلبك ✅\nباسوردك: '+data.pass+'\nرقمك السري: '+data.pin+'\nاحفظهم! المالك هيوافق عليك وتقدر تضيف عربياتك');
-}
-
-// المعرض يضيف عربيته
-async function addShowCar(){
-  let car={
-    title: document.getElementById('c_title').value,
-    price: parseInt(document.getElementById('c_price').value),
-    img: document.getElementById('c_img').value,
-    year: document.getElementById('c_year').value,
-    showroomPhone: currentShowroom.phone,
-    showroomName: currentShowroom.name,
-    status: 'active',
-    createdAt: Date.now()
-  };
-  await db.collection('cars').add(car);
-  alert('تم نشر العربية في صفحتك ✅');
-}
-
-// المشتري يدوس اشتري - يطلعله دفع المعرض
-function openBuy(car, showroom){
-  document.getElementById('buyBox').style.display='block';
-  document.getElementById('buyTitle').innerText='💳 ادفع ثمن '+car.title+' - '+car.price.toLocaleString()+' جنيه';
-  document.getElementById('buyInfo').innerText='المعرض: '+showroom.name+' - '+showroom.city;
-  document.getElementById('buyPayInfo').innerHTML=
-    'حول على: <b>'+showroom.payType+'</b><br>'+
-    'رقم المحفظة / الحساب: <b style="font-size:18px">'+showroom.wallet+'</b><br>'+
-    'الاسم: '+showroom.bankName+'<br>'+
-    'المبلغ: <b>'+car.price.toLocaleString()+' جنيه</b>';
-  window.currentBuy={car, showroom};
-  document.getElementById('buyBox').scrollIntoView({behavior:'smooth'});
-}
-
-async function confirmPay(){
-  let ref=document.getElementById('payRef').value;
-  if(!ref){ alert('اكتب رقم العملية'); return; }
-  await db.collection('payments').add({
-    car: window.currentBuy.car.title,
-    price: window.currentBuy.car.price,
-    showroom: window.currentBuy.showroom.name,
-    showroomPhone: window.currentBuy.showroom.phone,
-    ref: ref,
-    status: 'waiting_confirm',
-    createdAt: Date.now()
-  });
-  alert('تم ارسال تأكيد الدفع للمعرض ✅ المعرض هيأكد ان الفلوس وصلت ويتواصل معاك');
+function register(){
+  let name=document.getElementById('s_name').value;
+  let phone=document.getElementById('s_phone').value;
+  if(!name || !phone){ alert('اكتب اسم المعرض ورقم التواصل الاول'); return; }
+  alert('تم تسجيل معرضك يا '+name+' ✅\nادفع الاشتراك عشان صفحتك تشتغل');
 }
 </script>
+</body>
+</html>
