@@ -262,5 +262,41 @@ function addShowroom(){var cc=document.getElementById('showCountry').value;var n
 document.getElementById('langBtn').addEventListener('click', function(){ toggleLang(); });
 applyCountryUI();applyLang();updateOwnerUI();fillCountrySelects();updateCityList();updateShowCityList();updateModelList();
 </script>
+  <!-- Firebase - Motors Egypt / arbyitk -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyBo4pNxo1E9MFnbMhBZqFFkLkR-GlFcF1I",
+  authDomain: "arbyitk.firebaseapp.com",
+  projectId: "arbyitk",
+  storageBucket: "arbyitk.firebasestorage.app",
+  messagingSenderId: "998421358989",
+  appId: "1:998421358989:web:996cf9cbf630c03906f5c4",
+  measurementId: "G-EM8XZ2MV6Q"
+};
+try{ firebase.initializeApp(firebaseConfig); var db = firebase.firestore(); }catch(e){}
+var oldConfirmPay = confirmPay;
+confirmPay = function(){
+  var method = document.getElementById('payMethod').value;
+  var ref = document.getElementById('payRef').value || 'بدون رقم';
+  if(tempPay){ try{ db.collection("requests").add({type: tempPay.type, data: tempPay.data, payMethod: method, payRef: ref, country: tempPay.data.country || "", time: new Date().toISOString(), status: "pending"}); }catch(e){} }
+  oldConfirmPay();
+};
+var oldRenderOwner = renderOwner;
+renderOwner = function(){
+  oldRenderOwner();
+  try{
+    db.collection("requests").orderBy("time","desc").limit(20).get().then(function(snap){
+      var html = '<div style="background:#E8F5E9;padding:10px;border-radius:10px;margin:10px 0"><b>🔥 طلبات من Firebase</b><br>';
+      if(snap.empty){ html += 'لسه مفيش طلبات'; }
+      snap.forEach(function(doc){ var d = doc.data(); var dd = d.data || {}; html += '<div style="background:#fff;padding:10px;border-radius:10px;margin:8px 0;border:1px solid #ddd"><b>'+(dd.name||'')+'</b> - '+(d.type||'')+'<br>📍 '+(dd.city||'')+' - '+(dd.country||'')+'<br>📱 '+(dd.wa||dd.phone||'')+'<br>💳 '+(d.payMethod||'')+' - رقم: '+(d.payRef||'')+'</div>'; });
+      html += '</div>';
+      var box = document.getElementById('pendingCarsList');
+      if(box) box.innerHTML = html + box.innerHTML;
+    });
+  }catch(e){}
+};
+</script>
 </body>
 </html>
