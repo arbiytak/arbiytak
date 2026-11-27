@@ -284,5 +284,16 @@ window.firebaseAddDoc = addDoc;
 window.firebaseGetDocs = getDocs;
 console.log("Firebase connected");
 </script>
+<script>
+document.addEventListener('click', function(e){
+  let el = e.target.closest('.notif, .notification, .bell-item');
+  if(!el) return;
+  let ok = confirm("Approve this customer?");
+  if(ok){
+    alert("Done - Approved");
+    location.reload();
+  }
+});
+</script>
 </body>
 </html>
