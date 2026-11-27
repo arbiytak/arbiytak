@@ -261,6 +261,26 @@ function addShowroom(){var cc=document.getElementById('showCountry').value;var n
 
 document.getElementById('langBtn').addEventListener('click', function(){ toggleLang(); });
 applyCountryUI();applyLang();updateOwnerUI();fillCountrySelects();updateCityList();updateShowCityList();updateModelList();
+</<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "حط هنا الـ apiKey بتاعك",
+  authDomain: "arbyatk.firebaseapp.com",
+  projectId: "arbyatk",
+  storageBucket: "arbyatk.appspot.com",
+  messagingSenderId: "حط هنا الرقم",
+  appId: "حط هنا الـ appId"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.firebaseCollection = collection;
+window.firebaseAddDoc = addDoc;
+window.firebaseGetDocs = getDocs;
+console.log("تم توصيل فايربيز بنجاح ✅");
 </script>
 </body>
 </html>
