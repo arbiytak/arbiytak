@@ -19,7 +19,7 @@ body{background:#fff;max-width:480px;margin:auto;padding-bottom:90px}
 .sec{padding:10px 16px 6px;font-size:20px;font-weight:900}
 .brands{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;padding:6px 16px}
 .brand{border:1px solid #eee;border-radius:14px;padding:10px 4px;text-align:center;cursor:pointer;background:#fff}
-.brand img{width:44px;height:32px;object-fit:contain}
+.brand img{width:52px;height:36px;object-fit:contain}
 .brand div{font-size:12px;font-weight:800;margin-top:6px}
 .grid{padding:10px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .card{border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);background:#fff}
@@ -51,22 +51,22 @@ var lang = localStorage.getItem('motors_lang') || 'ar';
 var curFilter = 'الكل';
 var curBrand = '';
 var brands = [
-{name:'Toyota',logo:'https://logo.clearbit.com/toyota.com'},
-{name:'Hyundai',logo:'https://logo.clearbit.com/hyundai.com'},
-{name:'Kia',logo:'https://logo.clearbit.com/kia.com'},
-{name:'Nissan',logo:'https://logo.clearbit.com/nissan.com'},
-{name:'Mazda',logo:'https://logo.clearbit.com/mazda.com'},
-{name:'Mercedes',logo:'https://logo.clearbit.com/mercedes-benz.com'},
-{name:'BMW',logo:'https://logo.clearbit.com/bmw.com'},
-{name:'Renault',logo:'https://logo.clearbit.com/renault.com'},
-{name:'Chevrolet',logo:'https://logo.clearbit.com/chevrolet.com'},
-{name:'MG',logo:'https://logo.clearbit.com/mg.co.uk'},
-{name:'Audi',logo:'https://logo.clearbit.com/audi.com'},
-{name:'Volkswagen',logo:'https://logo.clearbit.com/vw.com'},
-{name:'Ford',logo:'https://logo.clearbit.com/ford.com'},
-{name:'Peugeot',logo:'https://logo.clearbit.com/peugeot.com'},
-{name:'Suzuki',logo:'https://logo.clearbit.com/suzuki.com'},
-{name:'BYD',logo:'https://logo.clearbit.com/byd.com'}
+{name:'Toyota',logo:'https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg'},
+{name:'Hyundai',logo:'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg'},
+{name:'Kia',logo:'https://upload.wikimedia.org/wikipedia/commons/9/9e/Kia-logo.png'},
+{name:'Nissan',logo:'https://upload.wikimedia.org/wikipedia/commons/2/23/Nissan_logo.svg'},
+{name:'Mazda',logo:'https://upload.wikimedia.org/wikipedia/commons/7/7c/Mazda_logo_with_emblem.svg'},
+{name:'Mercedes',logo:'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg'},
+{name:'BMW',logo:'https://upload.wikimedia.org/wikipedia/commons/f/f4/BMW_logo_%28gray%29.svg'},
+{name:'Renault',logo:'https://upload.wikimedia.org/wikipedia/commons/5/51/Renault_logo_2021.svg'},
+{name:'Chevrolet',logo:'https://upload.wikimedia.org/wikipedia/commons/c/c9/Chevrolet-logo.png'},
+{name:'MG',logo:'https://upload.wikimedia.org/wikipedia/commons/d/d1/MG_logo.svg'},
+{name:'Audi',logo:'https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg'},
+{name:'Volkswagen',logo:'https://upload.wikimedia.org/wikipedia/commons/6/6d/Volkswagen_logo_2019.svg'},
+{name:'Ford',logo:'https://upload.wikimedia.org/wikipedia/commons/a/a0/Ford_logo_flat.svg'},
+{name:'Peugeot',logo:'https://upload.wikimedia.org/wikipedia/commons/8/8a/Peugeot_Logo.svg'},
+{name:'Suzuki',logo:'https://upload.wikimedia.org/wikipedia/commons/9/95/Suzuki_logo.svg'},
+{name:'BYD',logo:'https://upload.wikimedia.org/wikipedia/commons/1/13/BYD_logo.svg'}
 ];
 var cars = [
 {name:"Toyota Corolla 2023",brand:"Toyota",price:850000,city:"القاهرة",year:2023,kind:"مستعمل",img:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800"},
@@ -81,15 +81,13 @@ function renderAll(){
   var chips = document.getElementById('chipsBox'); chips.innerHTML='';
   var fl = lang==='en' ? filtersEn : filtersAr;
   fl.forEach(function(f,i){
-    var b=document.createElement('div'); b.className='chip'+(curFilter===(lang==='en'?filtersEn[i]:filtersAr[i]) || (i===0 && curFilter==='الكل') ? ' on':''); 
-    if(lang==='en' && i===0) b.className='chip'+(curFilter==='الكل'?' on':'');
-    b.innerText=f; b.onclick=function(){ curFilter = filtersAr[i]; renderAll(); }; chips.appendChild(b);
+    var b=document.createElement('div'); b.className='chip'+(curFilter===filtersAr[i]?' on':''); b.innerText=f; b.onclick=function(){ curFilter = filtersAr[i]; renderAll(); }; chips.appendChild(b);
   });
   var bg=document.getElementById('brandsGrid'); bg.innerHTML='';
   brands.forEach(function(br){
     var d=document.createElement('div'); d.className='brand';
     d.style.borderColor = curBrand===br.name ? '#00AA06':'#eee';
-    d.innerHTML='<img src="'+br.logo+'" onerror="this.style.display=\'none\'"><div>'+br.name+'</div>';
+    d.innerHTML='<img src="'+br.logo+'" alt="'+br.name+'"><div>'+br.name+'</div>';
     d.onclick=function(){ curBrand = (curBrand===br.name?'':br.name); renderAll(); };
     bg.appendChild(d);
   });
