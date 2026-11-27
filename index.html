@@ -263,23 +263,78 @@ document.getElementById('langBtn').addEventListener('click', function(){ toggleL
 
 applyCountryUI();applyLang();updateOwnerUI();fillCountrySelects();updateCityList(); 
 </script>
- <button id="ownerBtn" style="position:fixed;bottom:80px;left:12px;z-index:9999;background:#000;color:#fff;border:none;padding:12px 16px;border-radius:50px;font-weight:bold;box-shadow:0 4px 14px rgba(0,0,0,.3)">دخول المالك</button>
-<script>
+<!-- ربط فايربيز - المالك -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, query, where, onSnapshot, updateDoc, doc, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCBTJt0zUdgzOS3ccoURVLPR2d83y7332c",
+  authDomain: "arbyatk.firebaseapp.com",
+  projectId: "arbyatk",
+  storageBucket: "arbyatk.firebasestorage.app",
+  messagingSenderId: "881584419402",
+  appId: "1:881584419402:web:80792c52d7ffcfdc3e6cb3"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.firestoreFuncs = { collection, query, where, onSnapshot, updateDoc, doc, orderBy };
+console.log("Firebase connected ✅");
+</script>
+
+<button id="ownerBtn" style="position:fixed;bottom:80px;left:12px;z-index:9999;background:#000;color:#fff;border:none;padding:12px 16px;border-radius:50px;font-weight:bold;box-shadow:0 4px 14px rgba(0,0,0,.3)">دخول المالك</button>
+
+<div id="ownerPanel" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:10000;padding:20px;overflow:auto">
+  <button onclick="document.getElementById('ownerPanel').style.display='none'" style="background:red;color:#fff;border:none;padding:10px 16px;border-radius:10px">اقفل X</button>
+  <h2>اشعارات الدفع - Toyota Corolla</h2>
+  <div id="ownerNotifs">جاري التحميل من فايربيز...</div>
+</div>
+
+<script type="module">
+import { getFirestore, collection, query, orderBy, onSnapshot, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+const firebaseConfig2 = {
+  apiKey: "AIzaSyCBTJt0zUdgzOS3ccoURVLPR2d83y7332c",
+  authDomain: "arbyatk.firebaseapp.com",
+  projectId: "arbyatk",
+  storageBucket: "arbyatk.firebasestorage.app",
+  messagingSenderId: "881584419402",
+  appId: "1:881584419402:web:80792c52d7ffcfdc3e6cb3"
+};
+const app2 = initializeApp(firebaseConfig2, "ownerApp");
+const db2 = getFirestore(app2);
+
 document.getElementById('ownerBtn').onclick = function(){
   let code = prompt("اكتب كود المالك:");
   if(code === "1234"){
-    alert("اهلا يا مالك - هنا هتظهر الاشعارات والموافقات");
-    // هنا هنفتح لوحة الاشعارات
     document.getElementById('ownerPanel').style.display = 'block';
-  } else {
-    alert("الكود غلط");
-  }
+    loadNotifs();
+  } else { alert("الكود غلط"); }
+};
+
+function loadNotifs(){
+  const q = query(collection(db2, "bookings"), orderBy("createdAt", "desc"));
+  onSnapshot(q, (snap)=>{
+    let html = "";
+    if(snap.empty){ html = "<p>مفيش حجوزات لسه</p>"; }
+    snap.forEach((d)=>{
+      let b = d.data();
+      html += `<div style="border:1px solid #ddd;padding:12px;border-radius:12px;margin-bottom:10px">
+        <b>${b.carName || 'Toyota Corolla'}</b><br>
+        الاسم: ${b.name || '-'} - موبايل: ${b.phone || '-'}<br>
+        الحالة: ${b.status || 'pending'}<br>
+        ${b.status !== 'approved' ? `<button onclick="approveBooking('${d.id}')" style="background:green;color:#fff;border:none;padding:10px 16px;border-radius:10px;margin-top:8px">موافقة ✅</button>` : '<span>✅ تمت الموافقة</span>'}
+      </div>`;
+    });
+    document.getElementById('ownerNotifs').innerHTML = html;
+  });
+}
+window.approveBooking = async function(id){
+  await updateDoc(doc(db2, "bookings", id), { status: "approved" });
+  alert("تمت الموافقة ✅");
 };
 </script>
-<div id="ownerPanel" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:10000;padding:20px;overflow:auto">
-  <button onclick="document.getElementById('ownerPanel').style.display='none'" style="background:red;color:#fff;border:none;padding:10px;border-radius:10px">اقفل X</button>
-  <h2>اشعارات الدفع</h2>
-  <div id="ownerNotifs">جاري التحميل...</div>
-</div> 
 </body>
 </html>
