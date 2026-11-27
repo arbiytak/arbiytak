@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
@@ -7,34 +7,43 @@ DOCTYPE html>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#fff;max-width:480px;margin:auto;padding-bottom:90px}
-.top{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.top{padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
 .top b{font-size:20px}.top b span{color:#00AA06}
-.pill{border:1px solid #00AA06;background:#E8F5E9;color:#00AA06;padding:7px 12px;border-radius:20px;font-weight:900;font-size:13px;cursor:pointer}
-.sel{border:1px solid #ddd;border-radius:20px;padding:7px 10px;font-weight:800;font-size:13px;background:#fff}
+.pill{border:1px solid #00AA06;background:#E8F5E9;color:#00AA06;padding:7px 12px;border-radius:20px;font-weight:900;cursor:pointer}
+.sel{border:1px solid #ddd;border-radius:20px;padding:7px 10px;font-weight:800;background:#fff}
 .search{background:#F6F7F9;border-radius:12px;display:flex;padding:12px;gap:8px;margin:0 16px;align-items:center}
 .search input{flex:1;border:none;outline:none;background:transparent;font-size:15px}
 .chips{display:flex;gap:8px;padding:12px 16px;overflow:auto}
-.chip{border:1px solid #ddd;padding:8px 16px;border-radius:20px;white-space:nowrap;font-weight:700;font-size:14px;background:#fff;cursor:pointer}
-.chip.on{background:#00AA06;color:#fff;border-color:#00AA06}
+.chip{border:1px solid #ddd;padding:8px 16px;border-radius:20px;white-space:nowrap;font-weight:700;background:#fff;cursor:pointer}
+.chip.on{background:#00AA06;color:#fff}
 .sec{padding:10px 16px 6px;font-size:20px;font-weight:900}
 .brands{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;padding:6px 16px}
-.brand{border:1px solid #eee;border-radius:14px;padding:10px 4px;text-align:center;cursor:pointer;background:#fff}
-.brand img{width:52px;height:36px;object-fit:contain}
+.brand{border:1px solid #eee;border-radius:14px;padding:10px 4px;text-align:center;cursor:pointer;background:#fff;height:84px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.brand img{width:52px;height:32px;object-fit:contain}
+.brand .fallback{width:52px;height:32px;background:#00AA06;color:#fff;border-radius:8px;display:none;align-items:center;justify-content:center;font-weight:900;font-size:20px}
 .brand div{font-size:12px;font-weight:800;margin-top:6px}
 .grid{padding:10px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);background:#fff}
+.card{border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);background:#fff;cursor:pointer}
 .card img{width:100%;height:110px;object-fit:cover}
 .cb{padding:10px}.price{color:#00AA06;font-weight:900;margin-top:4px}
-.wa{display:block;text-align:center;background:#00AA06;color:#fff;text-decoration:none;padding:8px;border-radius:10px;font-weight:800;font-size:13px;margin-top:8px}
+.wa{display:block;text-align:center;background:#00AA06;color:#fff;text-decoration:none;padding:10px;border-radius:10px;font-weight:800;margin-top:8px}
+.call{display:block;text-align:center;background:#fff;border:2px solid #00AA06;color:#00AA06;text-decoration:none;padding:9px;border-radius:10px;font-weight:800;margin-top:8px}
 .pkg{border:2px solid #eee;border-radius:16px;padding:16px;margin:10px 0;text-align:center;background:#fff}
 .pkg .pr{font-size:22px;font-weight:900;color:#00AA06;margin:6px 0}
-.showCard{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center;margin:0 16px 10px}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:8px 0}
-nav a{text-decoration:none;color:#777;text-align:center;font-size:12px}
+.showCard{background:#fff;border:1px solid #eee;border-radius:16px;padding:14px;display:flex;gap:12px;align-items:center;margin:0 16px 10px;cursor:pointer}
+.back{background:#f1f1f1;border:none;padding:8px 14px;border-radius:20px;font-weight:800;cursor:pointer;margin:10px 16px}
+.detailImg{width:100%;height:220px;object-fit:cover;border-radius:0}
+.detailBox{padding:16px}
+.ownerBox{background:#F6F7F9;border-radius:16px;padding:14px;margin-top:12px}
+.ownerBox b{font-size:17px}
+.hidden{display:none!important}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid #eee;display:flex;justify-content:space-around;padding:8px 0;z-index:10}
+nav a{text-decoration:none;color:#777;text-align:center;font-size:12px;cursor:pointer}
 </style>
 </head>
 <body>
-<div class="top"><b>Motors <span>Egypt</span></b><div style="display:flex;gap:6px;align-items:center"><select class="sel" id="countrySel"><option>🇪🇬 مصر</option><option>🇸🇦 السعودية</option><option>🇦🇪 الإمارات</option></select><button class="pill" onclick="toggleLang()" id="langBtn">EN</button></div></div>
+<div id="pageHome">
+<div class="top"><b>Motors <span>Egypt</span></b><div style="display:flex;gap:6px;align-items:center"><select class="sel"><option>🇪🇬 مصر</option><option>🇸🇦 السعودية</option><option>🇦🇪 الإمارات</option></select><button class="pill" onclick="toggleLang()" id="langBtn">EN</button></div></div>
 <div class="search">🔍<input id="searchInput" oninput="doSearch()" placeholder="دور على عربيتك"><span>⚙️</span></div>
 <div class="chips" id="chipsBox"></div>
 <h2 class="sec" id="tBrands">ماركات السيارات</h2>
@@ -44,8 +53,27 @@ nav a{text-decoration:none;color:#777;text-align:center;font-size:12px}
 <h2 class="sec" id="tShows">المعارض 🏢 - مصر</h2>
 <div id="showsList"></div>
 <h2 class="sec" id="tPkgs">باقات المعارض 💰 - مصر</h2>
-<div style="padding:0 16px" id="pkgsBox"></div>
-<nav><a href="#">🏠<br><span id="nHome">الرئيسية</span></a><a href="#">🚗<br><span id="nUsed">مستعملة</span></a><a href="#">➕<br><span id="nAdd">أضف إعلان</span></a><a href="#">🚙<br><span id="nNew">جديدة</span></a></nav>
+<div style="padding:0 16px"><div class="pkg"><h3>🚗 عربية واحدة</h3><div class="pr">50 جنيه</div><p>عربية واحدة بس</p><a class="wa" href="https://wa.me/201000000000">اشترك واتساب</a></div><div class="pkg"><h3>⭐ ذهبي</h3><div class="pr">1500 جنيه / شهر</div><p>20 عربية</p><a class="wa" href="https://wa.me/201000000000">اشترك واتساب</a></div><div class="pkg"><h3>💎 بلاتيني</h3><div class="pr">3500 جنيه / شهر</div><p>عربيات بلا حدود</p><a class="wa" href="https://wa.me/201000000000">اشترك واتساب</a></div></div>
+</div>
+
+<div id="pageShowrooms" class="hidden">
+<button class="back" onclick="goHome()">← رجوع</button>
+<h2 class="sec">كل المعارض 🏢</h2>
+<div id="allShows"></div>
+</div>
+
+<div id="pageShowroom" class="hidden">
+<button class="back" onclick="goHome()">← رجوع</button>
+<div id="showroomDetail"></div>
+</div>
+
+<div id="pageCar" class="hidden">
+<button class="back" onclick="goHome()">← رجوع</button>
+<div id="carDetail"></div>
+</div>
+
+<nav><a onclick="goHome()">🏠<br>الرئيسية</a><a onclick="goShowrooms()">🏢<br>المعارض</a><a>➕<br>أضف إعلان</a><a onclick="goHome()">🚙<br>جديدة</a></nav>
+
 <script>
 var lang = localStorage.getItem('motors_lang') || 'ar';
 var curFilter = 'الكل';
@@ -53,13 +81,13 @@ var curBrand = '';
 var brands = [
 {name:'Toyota',logo:'https://upload.wikimedia.org/wikipedia/commons/9/9d/Toyota_carlogo.svg'},
 {name:'Hyundai',logo:'https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg'},
-{name:'Kia',logo:'https://upload.wikimedia.org/wikipedia/commons/9/9e/Kia-logo.png'},
-{name:'Nissan',logo:'https://upload.wikimedia.org/wikipedia/commons/2/23/Nissan_logo.svg'},
+{name:'Kia',logo:'https://upload.wikimedia.org/wikipedia/commons/4/42/Kia_logo_2021.svg'},
+{name:'Nissan',logo:'https://upload.wikimedia.org/wikipedia/commons/8/8c/Nissan_logo_2020.svg'},
 {name:'Mazda',logo:'https://upload.wikimedia.org/wikipedia/commons/7/7c/Mazda_logo_with_emblem.svg'},
 {name:'Mercedes',logo:'https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg'},
 {name:'BMW',logo:'https://upload.wikimedia.org/wikipedia/commons/f/f4/BMW_logo_%28gray%29.svg'},
 {name:'Renault',logo:'https://upload.wikimedia.org/wikipedia/commons/5/51/Renault_logo_2021.svg'},
-{name:'Chevrolet',logo:'https://upload.wikimedia.org/wikipedia/commons/c/c9/Chevrolet-logo.png'},
+{name:'Chevrolet',logo:'https://upload.wikimedia.org/wikipedia/commons/1/1e/Chevrolet-logo.png'},
 {name:'MG',logo:'https://upload.wikimedia.org/wikipedia/commons/d/d1/MG_logo.svg'},
 {name:'Audi',logo:'https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg'},
 {name:'Volkswagen',logo:'https://upload.wikimedia.org/wikipedia/commons/6/6d/Volkswagen_logo_2019.svg'},
@@ -69,38 +97,42 @@ var brands = [
 {name:'BYD',logo:'https://upload.wikimedia.org/wikipedia/commons/1/13/BYD_logo.svg'}
 ];
 var cars = [
-{name:"Toyota Corolla 2023",brand:"Toyota",price:850000,city:"القاهرة",year:2023,kind:"مستعمل",img:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800"},
-{name:"Hyundai Tucson 2022",brand:"Hyundai",price:1250000,city:"الجيزة",year:2022,kind:"مستعمل",img:"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800"},
-{name:"Kia Sportage 2021",brand:"Kia",price:980000,city:"الإسكندرية",year:2021,kind:"كسر زيرو",img:"https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800"},
-{name:"Nissan Sunny 2022",brand:"Nissan",price:520000,city:"القاهرة",year:2022,kind:"مستعمل",img:"https://images.unsplash.com/photo-1592805144716-feeccccef5ac?w=800"}
+{id:1,name:"Toyota Corolla 2023",brand:"Toyota",price:850000,city:"القاهرة",year:2023,kind:"مستعمل",img:"https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800",owner:"أحمد محمد",phone:"01000000001",ownerType:"مالك",showroom:""},
+{id:2,name:"Hyundai Tucson 2022",brand:"Hyundai",price:1250000,city:"الجيزة",year:2022,kind:"مستعمل",img:"https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800",owner:"معرض النور موتورز",phone:"01000000002",ownerType:"معرض",showroom:"معرض النور موتورز"},
+{id:3,name:"Kia Sportage 2021",brand:"Kia",price:980000,city:"الإسكندرية",year:2021,kind:"كسر زيرو",img:"https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=800",owner:"محمود علي",phone:"01000000003",ownerType:"مالك",showroom:""},
+{id:4,name:"Nissan Sunny 2022",brand:"Nissan",price:520000,city:"القاهرة",year:2022,kind:"مستعمل",img:"https://images.unsplash.com/photo-1592805144716-feeccccef5ac?w=800",owner:"معرض الأصدقاء",phone:"01000000004",ownerType:"معرض",showroom:"معرض الأصدقاء"}
 ];
-var shows = [{name:"معرض النور موتورز",city:"القاهرة - مدينة نصر",pkg:"بلاتيني",count:"12 عربية"},{name:"معرض الأصدقاء",city:"الجيزة - فيصل",pkg:"ذهبي",count:"8 عربيات"}];
+var shows = [
+{name:"معرض النور موتورز",city:"القاهرة - مدينة نصر",pkg:"بلاتيني",phone:"01000000002",desc:"معرض متخصص في الكوري والياباني، تقسيط وكاش"},
+{name:"معرض الأصدقاء",city:"الجيزة - فيصل",pkg:"ذهبي",phone:"01000000004",desc:"عربيات مستعملة وكسر زيرو بضمان"}
+];
 var filtersAr = ['الكل','كسر زيرو','مستعمل','زيرو'];
 var filtersEn = ['All','Almost New','Used','Zero'];
+function goHome(){ document.getElementById('pageHome').classList.remove('hidden'); document.getElementById('pageShowrooms').classList.add('hidden'); document.getElementById('pageShowroom').classList.add('hidden'); document.getElementById('pageCar').classList.add('hidden'); window.scrollTo(0,0); }
+function goShowrooms(){ document.getElementById('pageHome').classList.add('hidden'); document.getElementById('pageShowrooms').classList.remove('hidden'); document.getElementById('pageShowroom').classList.add('hidden'); document.getElementById('pageCar').classList.add('hidden'); renderShowsPage(); window.scrollTo(0,0); }
+function openShowroom(name){ var s = shows.find(x=>x.name===name); var list = cars.filter(c=>c.showroom===name); var html = '<div class="detailBox"><div style="font-size:50px">🏢</div><h2>'+s.name+'</h2><p style="color:#555;margin:6px 0">📍 '+s.city+' • باقة '+s.pkg+'</p><p>'+s.desc+'</p><div class="ownerBox"><b>📞 '+s.phone+'</b></div><a class="wa" href="https://wa.me/20'+s.phone.slice(1)+'">واتساب المعرض</a><h3 style="margin-top:16px">عربيات المعرض</h3></div><div class="grid">'; list.forEach(c=>{ html += '<div class="card" onclick="openCar('+c.id+')"><img src="'+c.img+'"><div class="cb"><h3>'+c.name+'</h3><div class="price">'+c.price.toLocaleString()+' جنيه</div></div></div>'; }); html += '</div>'; if(list.length===0) html += '<p style="padding:0 16px">لا توجد عربيات حاليا</p>'; document.getElementById('showroomDetail').innerHTML = html; document.getElementById('pageHome').classList.add('hidden'); document.getElementById('pageShowrooms').classList.add('hidden'); document.getElementById('pageShowroom').classList.remove('hidden'); document.getElementById('pageCar').classList.add('hidden'); window.scrollTo(0,0); }
+function openCar(id){ var c = cars.find(x=>x.id===id); var html = '<img class="detailImg" src="'+c.img+'"><div class="detailBox"><h2>'+c.name+'</h2><div class="price" style="font-size:22px">'+c.price.toLocaleString()+' جنيه</div><p style="color:#555;margin:8px 0">📍 '+c.city+' • '+c.year+' • '+c.kind+' • '+c.brand+'</p><div class="ownerBox"><div style="font-size:32px">👤</div><b>'+c.owner+'</b><br><span style="color:#555">'+c.ownerType+' • '+c.city+'</span><br><span style="color:#555">📞 '+c.phone+'</span></div><a class="wa" href="https://wa.me/20'+c.phone.slice(1)+'">واتساب '+c.owner+'</a><a class="call" href="tel:'+c.phone+'">📞 اتصل بالمالك</a>'+(c.showroom ? '<a class="call" onclick="openShowroom(\''+c.showroom+'\')">🏢 شوف صفحة المعرض</a>' : '')+'</div>'; document.getElementById('carDetail').innerHTML = html; document.getElementById('pageHome').classList.add('hidden'); document.getElementById('pageShowrooms').classList.add('hidden'); document.getElementById('pageShowroom').classList.add('hidden'); document.getElementById('pageCar').classList.remove('hidden'); window.scrollTo(0,0); }
+function renderShowsPage(){ var el=document.getElementById('allShows'); el.innerHTML=''; shows.forEach(s=>{ var d=document.createElement('div'); d.className='showCard'; d.onclick=function(){openShowroom(s.name)}; d.innerHTML='<div style="font-size:32px">🏢</div><div><b>'+s.name+'</b><br><span style="color:#777;font-size:12px">📍 '+s.city+' • '+s.pkg+'</span><br><span style="color:#00AA06;font-size:12px;font-weight:800">دوس عشان تشوف عربياته →</span></div>'; el.appendChild(d); }); }
 function renderAll(){
   var chips = document.getElementById('chipsBox'); chips.innerHTML='';
   var fl = lang==='en' ? filtersEn : filtersAr;
-  fl.forEach(function(f,i){
-    var b=document.createElement('div'); b.className='chip'+(curFilter===filtersAr[i]?' on':''); b.innerText=f; b.onclick=function(){ curFilter = filtersAr[i]; renderAll(); }; chips.appendChild(b);
-  });
+  fl.forEach(function(f,i){ var b=document.createElement('div'); b.className='chip'+(curFilter===filtersAr[i]?' on':''); b.innerText=f; b.onclick=function(){ curFilter = filtersAr[i]; renderAll(); }; chips.appendChild(b); });
   var bg=document.getElementById('brandsGrid'); bg.innerHTML='';
   brands.forEach(function(br){
     var d=document.createElement('div'); d.className='brand';
     d.style.borderColor = curBrand===br.name ? '#00AA06':'#eee';
-    d.innerHTML='<img src="'+br.logo+'" alt="'+br.name+'"><div>'+br.name+'</div>';
+    d.innerHTML='<img src="'+br.logo+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="fallback">'+br.name.charAt(0)+'</div><div>'+br.name+'</div>';
     d.onclick=function(){ curBrand = (curBrand===br.name?'':br.name); renderAll(); };
     bg.appendChild(d);
   });
   var grid=document.getElementById('carsGrid'); grid.innerHTML='';
   cars.filter(function(c){ if(curBrand && c.brand!==curBrand) return false; if(curFilter!=='الكل' && c.kind!==curFilter) return false; return true; }).forEach(function(c){
-    var d=document.createElement('div'); d.className='card';
-    d.innerHTML='<img src="'+c.img+'"><div class="cb"><h3>'+c.name+'</h3><div class="price">'+c.price.toLocaleString()+' جنيه</div><div style="color:#555;font-size:12px">📍 '+c.city+' • '+c.year+' • '+c.kind+'</div><a class="wa" href="https://wa.me/201000000000">WhatsApp</a></div>';
+    var d=document.createElement('div'); d.className='card'; d.onclick=function(){openCar(c.id)};
+    d.innerHTML='<img src="'+c.img+'"><div class="cb"><h3>'+c.name+'</h3><div class="price">'+c.price.toLocaleString()+' جنيه</div><div style="color:#555;font-size:12px">📍 '+c.city+' • '+c.year+' • '+c.kind+'</div><div style="color:#00AA06;font-size:12px;font-weight:800;margin-top:4px">👤 '+c.owner+' - دوس للتفاصيل</div></div>';
     grid.appendChild(d);
   });
-  if(grid.innerHTML==='') grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:#888;padding:20px">لا توجد عربيات بهذا الفلتر</div>';
   var sb=document.getElementById('showsList'); sb.innerHTML='';
-  shows.forEach(function(s){ var d=document.createElement('div'); d.className='showCard'; d.innerHTML='<div style="font-size:28px">🏢</div><div><b>'+s.name+'</b><br><span style="color:#777;font-size:12px">📍 '+s.city+' • '+s.count+' • '+s.pkg+'</span></div>'; sb.appendChild(d); });
-  document.getElementById('pkgsBox').innerHTML='<div class="pkg"><h3>🚗 عربية واحدة</h3><div class="pr">50 جنيه</div><p>عربية واحدة بس - في مصر</p></div><div class="pkg"><h3>⭐ ذهبي</h3><div class="pr">1500 جنيه / شهر</div><p>20 عربية - في مصر</p></div><div class="pkg"><h3>💎 بلاتيني</h3><div class="pr">3500 جنيه / شهر</div><p>عربيات بلا حدود - في مصر</p></div>';
+  shows.forEach(function(s){ var d=document.createElement('div'); d.className='showCard'; d.onclick=function(){openShowroom(s.name)}; d.innerHTML='<div style="font-size:28px">🏢</div><div><b>'+s.name+'</b><br><span style="color:#777;font-size:12px">📍 '+s.city+' • '+s.pkg+'</span></div>'; sb.appendChild(d); });
   if(lang==='en'){ document.documentElement.lang='en'; document.documentElement.dir='ltr'; document.getElementById('langBtn').innerText='عربي'; document.getElementById('tBrands').innerText='Car Brands'; document.getElementById('tCars').innerText='Latest Cars - Egypt'; document.getElementById('tShows').innerText='Showrooms - Egypt'; document.getElementById('tPkgs').innerText='Showroom Packages - Egypt'; document.getElementById('searchInput').placeholder='Search your car'; }
   else { document.documentElement.lang='ar'; document.documentElement.dir='rtl'; document.getElementById('langBtn').innerText='EN'; document.getElementById('tBrands').innerText='ماركات السيارات'; document.getElementById('tCars').innerText='أحدث العربيات - مصر'; document.getElementById('tShows').innerText='المعارض 🏢 - مصر'; document.getElementById('tPkgs').innerText='باقات المعارض 💰 - مصر'; document.getElementById('searchInput').placeholder='دور على عربيتك'; }
 }
