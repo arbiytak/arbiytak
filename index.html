@@ -263,36 +263,10 @@ document.getElementById('langBtn').addEventListener('click', function(){ toggleL
 
 applyCountryUI();applyLang();updateOwnerUI();fillCountrySelects();updateCityList(); 
 </script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCBTJt0zUdgzOS3ccoURVLPR2d83y7332c",
-  authDomain: "arbyatk.firebaseapp.com",
-  projectId: "arbyatk",
-    storageBucket: "arbyatk.firebasestorage.app",
-    messagingSenderId: "881584419402",
-  appId: "1:881584419402:web:80792c52d7ffcfdc3e6cb3"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-window.db = db;
-window.firebaseCollection = collection;
-window.firebaseAddDoc = addDoc;
-window.firebaseGetDocs = getDocs;
-console.log("Firebase connected");
-</script>
 <script>
 document.addEventListener('click', function(e){
-  let el = e.target.closest('.notif, .notification, .bell-item');
-  if(!el) return;
-  let ok = confirm("Approve this customer?");
-  if(ok){
-    alert("Done - Approved");
-    location.reload();
-  }
+  alert("دست على: " + e.target.className + " | " + e.target.tagName);
 });
 </script>
 </body>
