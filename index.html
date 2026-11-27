@@ -263,11 +263,23 @@ document.getElementById('langBtn').addEventListener('click', function(){ toggleL
 
 applyCountryUI();applyLang();updateOwnerUI();fillCountrySelects();updateCityList(); 
 </script>
-
+ <button id="ownerBtn" style="position:fixed;bottom:80px;left:12px;z-index:9999;background:#000;color:#fff;border:none;padding:12px 16px;border-radius:50px;font-weight:bold;box-shadow:0 4px 14px rgba(0,0,0,.3)">دخول المالك</button>
 <script>
-document.addEventListener('click', function(e){
-  alert("دست على: " + e.target.className + " | " + e.target.tagName);
-});
+document.getElementById('ownerBtn').onclick = function(){
+  let code = prompt("اكتب كود المالك:");
+  if(code === "1234"){
+    alert("اهلا يا مالك - هنا هتظهر الاشعارات والموافقات");
+    // هنا هنفتح لوحة الاشعارات
+    document.getElementById('ownerPanel').style.display = 'block';
+  } else {
+    alert("الكود غلط");
+  }
+};
 </script>
+<div id="ownerPanel" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;z-index:10000;padding:20px;overflow:auto">
+  <button onclick="document.getElementById('ownerPanel').style.display='none'" style="background:red;color:#fff;border:none;padding:10px;border-radius:10px">اقفل X</button>
+  <h2>اشعارات الدفع</h2>
+  <div id="ownerNotifs">جاري التحميل...</div>
+</div> 
 </body>
 </html>
