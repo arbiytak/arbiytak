@@ -279,6 +279,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const db2 = db;
 window.db = db;
 window.firestoreFuncs = { collection, query, where, onSnapshot, updateDoc, doc, orderBy };
 console.log("Firebase connected ✅");
